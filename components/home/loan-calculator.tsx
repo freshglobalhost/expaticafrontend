@@ -3,8 +3,11 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Calculator, Percent, Calendar, Wallet } from "lucide-react";
+import Link from "next/link";
 import { Slider } from "@/components/ui/slider";
+import { Button } from "@/components/ui/button";
 import { calculateLoan } from "@/lib/loan-calculator";
+import { LOGIN_FOR_LOAN_APPLY } from "@/lib/auth-routes";
 import { formatCurrency } from "@/lib/utils";
 
 const MIN_AMOUNT = 1_000;
@@ -137,6 +140,10 @@ export function LoanCalculator() {
             <p className="text-center text-xs text-gray-500">
               Estimates are indicative. Final rates depend on credit assessment.
             </p>
+
+            <Button size="lg" className="w-full" asChild>
+              <Link href={LOGIN_FOR_LOAN_APPLY}>Apply for this loan</Link>
+            </Button>
           </div>
         </motion.div>
       </div>

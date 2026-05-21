@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
@@ -16,9 +16,11 @@ import { loginSchema, type LoginForm } from "@/lib/auth-schemas";
 import { login } from "@/lib/api/accounts";
 import { clearTokens } from "@/lib/api/auth-storage";
 import { getErrorMessage } from "@/lib/api/get-error-message";
+import { storeAuthNextPath } from "@/lib/auth-routes";
 
 export function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
 
@@ -41,6 +43,10 @@ export function LoginForm() {
     setApiError(null);
     try {
       await login(data.email, data.password);
+      const next = searchParams.get("next");
+      if (next?.startsWith("/")) {
+        storeAuthNextPath(next);
+      }
       router.push("/transaction-pin");
     } catch (err) {
       setApiError(getErrorMessage(err, "Sign in failed"));

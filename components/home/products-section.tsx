@@ -9,13 +9,14 @@ import {
   CreditCard,
   ArrowUpRight,
 } from "lucide-react";
+import { LOGIN_FOR_LOANS } from "@/lib/auth-routes";
 
 const products = [
   {
     icon: Banknote,
     title: "Personal Loans",
     description: "Up to $500K with flexible repayment. Approved in minutes.",
-    href: "/loans",
+    href: LOGIN_FOR_LOANS,
     gradient: "from-brand-500/20 to-brand-600/5",
     accent: "text-brand-400",
   },

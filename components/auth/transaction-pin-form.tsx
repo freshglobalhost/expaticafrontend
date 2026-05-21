@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { getAccessTokenUserId, logout } from "@/lib/api/auth-storage";
 import { verifyTransactionPin } from "@/lib/api/accounts";
 import { getErrorMessage } from "@/lib/api/get-error-message";
+import { consumeAuthNextPath } from "@/lib/auth-routes";
 
 export function TransactionPinForm() {
   const router = useRouter();
@@ -36,7 +37,8 @@ export function TransactionPinForm() {
     setErrorMessage(null);
     try {
       await verifyTransactionPin(pin);
-      router.push("/dashboard");
+      const next = consumeAuthNextPath();
+      router.push(next ?? "/dashboard");
     } catch (err) {
       setError(true);
       setErrorMessage(

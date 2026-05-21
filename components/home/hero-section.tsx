@@ -11,6 +11,7 @@ import {
   PiggyBank,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LOGIN_FOR_LOAN_APPLY } from "@/lib/auth-routes";
 
 const floatingCards = [
   { icon: Wallet, label: "Balance", value: "$2.4M", x: "-10%", y: "15%", delay: 0 },
@@ -73,7 +74,7 @@ export function HeroSection() {
             className="mt-10 flex flex-col items-center gap-4 sm:flex-row lg:justify-start"
           >
             <Button size="xl" className="group w-full sm:w-auto" asChild>
-              <Link href="/loans">
+              <Link href={LOGIN_FOR_LOAN_APPLY}>
                 Apply for Loan
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>

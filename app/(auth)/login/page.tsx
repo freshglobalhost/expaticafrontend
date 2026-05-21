@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { LoginForm } from "@/components/auth/login-form";
+import { LoginFormWrapper } from "@/components/auth/login-form-wrapper";
 import { RedirectIfAuthenticated } from "@/components/auth/redirect-if-authenticated";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -15,7 +15,7 @@ export default function LoginPage() {
   return (
     <RedirectIfAuthenticated>
       <div className="mx-auto w-full">
-        <LoginForm />
+        <LoginFormWrapper />
       </div>
     </RedirectIfAuthenticated>
   );

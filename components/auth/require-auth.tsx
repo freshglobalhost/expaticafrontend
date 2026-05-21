@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { isAuthenticated } from "@/lib/api/auth-storage";
+import { loginUrl } from "@/lib/auth-routes";
 
 function AuthCheckingFallback() {
   return (
@@ -25,7 +26,11 @@ export function RequireAuth({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const ok = isAuthenticated();
     if (!ok) {
-      router.replace("/login");
+      const returnTo =
+        typeof window !== "undefined"
+          ? `${window.location.pathname}${window.location.search}`
+          : "/dashboard";
+      router.replace(loginUrl(returnTo));
       return;
     }
     setAuthed(true);

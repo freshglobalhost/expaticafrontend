@@ -207,7 +207,7 @@ export type ApiSavingsGoal = {
 };
 
 export type ApiLockedSavings = {
-  id: string;
+  id: number;
   account_name: string;
   locked_amount: string;
   interest_rate_label: string;
@@ -217,7 +217,7 @@ export type ApiLockedSavings = {
 };
 
 export type ApiAutoSaveRule = {
-  id: string;
+  id: number;
   rule_name: string;
   description: string;
   is_enabled: boolean;

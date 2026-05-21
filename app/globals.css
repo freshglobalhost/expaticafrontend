@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-geist-sans: "Inter", system-ui, sans-serif;
+    --font-display: "Inter", system-ui, sans-serif;
+  }
+
+  * {
+    @apply border-surface-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface text-gray-100 antialiased;
+  }
+}
+
+/* Google Translate — compact floating picker above mobile bottom nav */
+.gtranslate_wrapper {
+  position: fixed !important;
+  display: block !important;
+  z-index: 45 !important;
+  border-radius: 8px !important;
+  padding: 2px 4px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+  background: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  transform: scale(0.88);
+  transform-origin: bottom left;
+}
+
+.gtranslate_wrapper img {
+  width: 20px !important;
+  height: 20px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
+}
+
+.gtranslate_wrapper .gt_float_switcher,
+.gtranslate_wrapper .gt-current-lang,
+.gtranslate_wrapper a {
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+}
+
+.gtranslate_wrapper .gt_float_switcher {
+  gap: 3px !important;
+  padding: 2px 3px !important;
+}
+
+@media (max-width: 1023px) {
+  .gtranslate_wrapper {
+    bottom: calc(4.25rem + env(safe-area-inset-bottom, 0px) + 10px) !important;
+    left: 12px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gtranslate_wrapper {
+    bottom: 20px !important;
+    left: calc(18rem + 20px) !important;
+  }
+}
+
+/* intl-tel-input — dark theme (signup) */
+.phone-input-wrap .iti {
+  width: 100%;
+  display: block;
+}
+
+.phone-input-wrap .iti__flag-container,
+.phone-input-wrap .iti__selected-country {
+  border-radius: 0.75rem 0 0 0.75rem;
+}
+
+.phone-input-wrap .iti__selected-country {
+  background: rgba(17, 24, 39, 0.8);
+  border: 1px solid #2a3548;
+  border-right: none;
+  padding: 0 8px 0 10px;
+}
+
+.phone-input-wrap .iti__selected-country:hover,
+.phone-input-wrap .iti__selected-country:focus {
+  background: rgba(26, 35, 50, 1);
+}
+
+.phone-input-wrap .iti--allow-dropdown input {
+  padding-left: 96px !important;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.phone-input-wrap--error .iti__selected-country {
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.phone-input-wrap .iti__country-list {
+  background: #1a2332;
+  border: 1px solid #2a3548;
+  border-radius: 0.75rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  max-height: 220px;
+  z-index: 50;
+}
+
+.phone-input-wrap .iti__country-list .iti__search-input {
+  background: #111827;
+  border: 1px solid #2a3548;
+  color: #f3f4f6;
+  border-radius: 0.5rem;
+  margin: 8px;
+  padding: 8px 10px;
+  width: calc(100% - 16px);
+}
+
+.phone-input-wrap .iti__country {
+  color: #e5e7eb;
+  padding: 8px 12px;
+}
+
+.phone-input-wrap .iti__country.iti__highlight {
+  background: rgba(20, 184, 166, 0.15);
+}
+
+.phone-input-wrap .iti__dial-code {
+  color: #9ca3af;
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}

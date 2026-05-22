@@ -40,7 +40,7 @@ export function SignupForm() {
     mode: "onChange",
     defaultValues: {
       country: "",
-      agreeTerms: false,
+      agreeTerms: true,
       transactionPin: "",
     },
   });

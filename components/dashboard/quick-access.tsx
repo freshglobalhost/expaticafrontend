@@ -7,7 +7,7 @@ import { useDashboard } from "@/components/providers/dashboard-provider";
 
 const QUICK_LINKS = [
   {
-    href: "/crypto/deposit",
+    href: "/deposit",
     label: "Deposit",
     icon: Plus,
     color: "bg-brand-500/15 text-brand-400",

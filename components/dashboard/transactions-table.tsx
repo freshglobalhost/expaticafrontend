@@ -8,6 +8,10 @@ import { Dialog } from "@/components/ui/dialog";
 import { useDashboard } from "@/components/providers/dashboard-provider";
 import type { DisplayTransaction } from "@/lib/dashboard-transactions";
 import { cn } from "@/lib/utils";
+import {
+  transactionStatusBadgeVariant,
+  transactionStatusLabel,
+} from "@/lib/transaction-status";
 
 const CATEGORIES: { value: string; label: string }[] = [
   { value: "all", label: "All" },
@@ -119,10 +123,10 @@ export function TransactionsTable({ compact = false }: { compact?: boolean }) {
                       {tx.amountLabel}
                     </p>
                     <Badge
-                      variant={tx.status === "completed" ? "success" : "warning"}
+                      variant={transactionStatusBadgeVariant(tx.status)}
                       className="mt-0.5 text-[9px]"
                     >
-                      {tx.status}
+                      {transactionStatusLabel(tx.status)}
                     </Badge>
                   </div>
                 </button>
@@ -173,10 +177,8 @@ export function TransactionsTable({ compact = false }: { compact?: boolean }) {
                       <span className="block text-xs text-gray-500">{tx.time}</span>
                     </td>
                     <td className="px-5 py-4">
-                      <Badge
-                        variant={tx.status === "completed" ? "success" : "warning"}
-                      >
-                        {tx.status}
+                      <Badge variant={transactionStatusBadgeVariant(tx.status)}>
+                        {transactionStatusLabel(tx.status)}
                       </Badge>
                     </td>
                     <td
@@ -222,7 +224,9 @@ export function TransactionsTable({ compact = false }: { compact?: boolean }) {
                 className="flex justify-between gap-4 border-b border-white/5 pb-2"
               >
                 <dt className="text-gray-500">{k}</dt>
-                <dd className="text-right font-medium text-white capitalize">{v}</dd>
+                <dd className="text-right font-medium text-white capitalize">
+                  {k === "Status" ? transactionStatusLabel(String(v)) : v}
+                </dd>
               </div>
             ))}
           </dl>

@@ -16,25 +16,23 @@ const UI_BY_SLUG = new Map<TransferMethodId, TransferMethod>(
   SEND_MONEY_OPTIONS.map((m) => [m.id, m])
 );
 
+export type MergeTransferMethodsOptions = {
+  /** When true, append API methods not listed in uiMethods (full /send page). Default false. */
+  allowApiExtras?: boolean;
+};
+
 /** Merge API methods with UI metadata (labels, images). */
 export function mergeTransferMethods(
   uiMethods: TransferMethod[],
-  apiMethods: ApiTransferMethod[]
+  apiMethods: ApiTransferMethod[],
+  options?: MergeTransferMethodsOptions
 ): MergedTransferMethod[] {
+  const allowApiExtras = options?.allowApiExtras ?? false;
   const apiBySlug = new Map(apiMethods.map((m) => [m.slug, m]));
 
-  if (apiMethods.length === 0) {
-    return uiMethods.map((ui, index) => ({
-      ...ui,
-      apiId: null,
-      displayOrder: index,
-    }));
-  }
-
-  const fromUi = uiMethods
-    .filter((ui) => apiBySlug.has(ui.id))
-    .map((ui) => {
-      const api = apiBySlug.get(ui.id)!;
+  const mergedFromUi = uiMethods.map((ui, index) => {
+    const api = apiBySlug.get(ui.id);
+    if (api) {
       return {
         ...ui,
         label: ui.label || api.name,
@@ -42,7 +40,17 @@ export function mergeTransferMethods(
         displayOrder: api.display_order,
         category: api.category,
       };
-    });
+    }
+    return {
+      ...ui,
+      apiId: null,
+      displayOrder: index,
+    };
+  });
+
+  if (!allowApiExtras || apiMethods.length === 0) {
+    return mergedFromUi;
+  }
 
   const uiSlugs = new Set(uiMethods.map((m) => m.id));
   const extraFromApi = apiMethods
@@ -60,7 +68,7 @@ export function mergeTransferMethods(
       };
     });
 
-  return [...fromUi, ...extraFromApi].sort((a, b) => a.displayOrder - b.displayOrder);
+  return [...mergedFromUi, ...extraFromApi].sort((a, b) => a.displayOrder - b.displayOrder);
 }
 
 export { DASHBOARD_SEND_OPTIONS, SEND_MONEY_OPTIONS };

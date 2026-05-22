@@ -11,12 +11,18 @@ export default function CryptoDepositPage() {
         description="Fund your wallet with crypto — BTC, ETH, USDT, or SOL"
         breadcrumbs={[
           { label: "Dashboard", href: "/dashboard" },
-          { label: "Deposit" },
+          { label: "Deposit", href: "/deposit" },
+          { label: "Crypto" },
         ]}
         action={
-          <Button variant="secondary" size="sm" asChild>
-            <Link href="/crypto/history">History</Link>
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="secondary" size="sm" asChild>
+              <Link href="/deposit/local">Local bank</Link>
+            </Button>
+            <Button variant="secondary" size="sm" asChild>
+              <Link href="/crypto/history">History</Link>
+            </Button>
+          </div>
         }
       />
       <CryptoDepositFlow />

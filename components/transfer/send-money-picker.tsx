@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { useTransferMethods } from "@/hooks/use-transfer-methods";
 import type { MergedTransferMethod } from "@/lib/transfer-methods-merge";
+import type { MergeTransferMethodsOptions } from "@/lib/transfer-methods-merge";
 import type { TransferMethod, TransferMethodId } from "@/lib/transfer-methods";
 import { TransferMethodCard } from "@/components/transfer/transfer-method-card";
 import { TransferModal } from "@/components/transfer/transfer-modal";
@@ -13,13 +14,20 @@ export function SendMoneyPicker({
   uiMethods,
   columnsClass = "grid grid-cols-2 gap-2.5 md:grid-cols-4 md:gap-3",
   sections,
+  allowApiExtras = false,
 }: {
   uiMethods: TransferMethod[];
   columnsClass?: string;
   sections?: { title: string; methods: TransferMethod[] }[];
+  /** Full /send page: include extra methods returned by the API */
+  allowApiExtras?: boolean;
 }) {
   const [transferType, setTransferType] = useState<TransferMethodId | null>(null);
-  const { methods: allMethods, isLoading, isReady } = useTransferMethods(uiMethods);
+  const mergeOptions: MergeTransferMethodsOptions = { allowApiExtras };
+  const { methods: allMethods, isLoading, isReady } = useTransferMethods(
+    uiMethods,
+    mergeOptions
+  );
 
   const methodApiId = getApiIdForMethod(allMethods, transferType);
 

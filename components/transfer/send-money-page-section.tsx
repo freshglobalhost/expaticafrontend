@@ -14,6 +14,7 @@ export function SendMoneyPageSection() {
     <div className="space-y-8">
       <SendMoneyPicker
         uiMethods={SEND_MONEY_OPTIONS}
+        allowApiExtras
         sections={[
           { title: "", methods: PRIMARY_SEND_OPTIONS },
           { title: "More options", methods: MORE_SEND_OPTIONS },

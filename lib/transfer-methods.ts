@@ -83,22 +83,22 @@ export const DASHBOARD_SEND_OPTIONS: TransferMethod[] = [
     image: `${IMG}/jh.png`,
   },
   {
-    id: "wise",
-    label: "Wise",
-    subtitle: "Low-fee transfer",
-    image: `${IMG}/22.png`,
-  },
-  {
     id: "paypal",
     label: "PayPal",
     subtitle: "Send via PayPal",
     image: `${IMG}/pa.png`,
   },
   {
-    id: "payoneer",
-    label: "Payoneer",
-    subtitle: "Business payments",
-    image: `${IMG}/34.png`,
+    id: "skrill",
+    label: "Skrill",
+    subtitle: "Send via Skrill",
+    image: `${IMG}/s.png`,
+  },
+  {
+    id: "wise",
+    label: "Wise",
+    subtitle: "Low-fee transfer",
+    image: `${IMG}/22.png`,
   },
 ];
 

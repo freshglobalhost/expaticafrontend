@@ -19,7 +19,19 @@ export type ApiUser = {
   has_transaction_pin: boolean;
   is_kyc_verified: boolean;
   is_profile_complete: boolean;
+  enable_transfer: boolean;
+  assigned_bank_account: ApiAssignedBankAccount | null;
   date_joined: string;
+};
+
+export type ApiAssignedBankAccount = {
+  account_holder: string;
+  bank_name: string;
+  account_number: string;
+  routing_or_swift: string;
+  country: string;
+  currency: string;
+  instructions: string;
 };
 
 export type ApiWallet = {

@@ -65,7 +65,7 @@ export function ForgotPasswordForm() {
           <p className="mt-3 text-sm text-gray-400">
             If an account exists for{" "}
             <span className="font-medium text-white">{getValues("email")}</span>, we sent a
-            6-digit code. In development, check the Django server console for the code.
+            6-digit code. .
           </p>
           <Button className="mt-8 w-full" size="lg" onClick={goToOtp}>
             Enter verification code

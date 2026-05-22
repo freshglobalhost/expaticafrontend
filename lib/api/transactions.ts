@@ -35,3 +35,17 @@ export async function createCryptoDeposit(payload: {
   }
   return apiFormRequest<ApiTransaction>("/transactions/crypto-deposit/", form, "POST");
 }
+
+export async function createLocalDeposit(payload: {
+  amount: string;
+  proof_image: File;
+  currency_code?: string;
+}) {
+  const form = new FormData();
+  form.set("amount", payload.amount);
+  form.set("proof_image", payload.proof_image);
+  if (payload.currency_code) {
+    form.set("currency_code", payload.currency_code);
+  }
+  return apiFormRequest<ApiTransaction>("/transactions/local-deposit/", form, "POST");
+}

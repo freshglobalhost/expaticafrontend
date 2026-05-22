@@ -5,19 +5,23 @@ import { useQuery } from "@tanstack/react-query";
 import { getTransferMethods } from "@/lib/api/banking";
 import {
   mergeTransferMethods,
+  type MergeTransferMethodsOptions,
   type MergedTransferMethod,
 } from "@/lib/transfer-methods-merge";
 import type { TransferMethod } from "@/lib/transfer-methods";
 
-export function useTransferMethods(uiMethods: TransferMethod[]) {
+export function useTransferMethods(
+  uiMethods: TransferMethod[],
+  mergeOptions?: MergeTransferMethodsOptions
+) {
   const query = useQuery({
     queryKey: ["transfer-methods"],
     queryFn: () => getTransferMethods({ page_size: 50 }),
   });
 
   const methods = useMemo(
-    () => mergeTransferMethods(uiMethods, query.data?.results ?? []),
-    [uiMethods, query.data]
+    () => mergeTransferMethods(uiMethods, query.data?.results ?? [], mergeOptions),
+    [uiMethods, query.data, mergeOptions?.allowApiExtras]
   );
 
   const methodIdBySlug = useMemo(() => {

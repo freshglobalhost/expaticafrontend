@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { QueryProvider } from "@/components/providers/query-provider";
+import { GoogleTranslate } from "@/components/layout/google-translate";
 import { TawkWidget } from "@/components/layout/tawk-widget";
 import { rootMetadata } from "@/lib/seo";
 
@@ -27,6 +28,7 @@ export default function RootLayout({
     <html lang="en" className="dark" suppressHydrationWarning data-scroll-behavior="smooth">
       <body className={`${inter.variable} font-sans`}>
         <QueryProvider>{children}</QueryProvider>
+        <GoogleTranslate />
         <TawkWidget />
       </body>
     </html>

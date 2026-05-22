@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { DashboardSidebar } from "@/components/dashboard/sidebar";
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { DashboardBottomNav } from "@/components/dashboard/bottom-nav";
-import { GoogleTranslate } from "@/components/layout/google-translate";
+import { DashboardBodyClass } from "@/components/layout/dashboard-body-class";
 import { DashboardProvider } from "@/components/providers/dashboard-provider";
 import { DashboardAuthGate } from "@/components/auth/dashboard-auth-gate";
 import { createPageMetadata } from "@/lib/seo";
@@ -34,7 +34,7 @@ export default function DashboardLayout({
           </div>
 
           <DashboardBottomNav />
-          <GoogleTranslate />
+          <DashboardBodyClass />
         </div>
       </DashboardProvider>
     </DashboardAuthGate>

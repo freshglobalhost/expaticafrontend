@@ -14,10 +14,21 @@
 
   html {
     scroll-behavior: smooth;
+    /* Prevent double-tap zoom on mobile */
+    touch-action: manipulation;
   }
 
   body {
     @apply bg-surface text-gray-100 antialiased;
+  }
+
+  /* iOS Safari zooms focused fields when font-size < 16px */
+  @media (hover: none) and (pointer: coarse) {
+    input,
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
   }
 }
 

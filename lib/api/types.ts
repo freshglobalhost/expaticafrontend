@@ -10,6 +10,7 @@ export type ApiUser = {
   account_reference: string;
   phone: string;
   country: string;
+  currency_code: string;
   address: string | null;
   gender: string | null;
   gender_label: string | null;

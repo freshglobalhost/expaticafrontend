@@ -20,6 +20,11 @@ import {
   type VirtualCard,
 } from "@/lib/cards-mock-data";
 import { cn } from "@/lib/utils";
+import {
+  useAccountCurrency,
+  useCurrencyInputPrefix,
+  useFormatAccountMoney,
+} from "@/hooks/use-account-currency";
 
 const inputClass =
   "h-10 w-full rounded-xl border border-white/10 bg-surface-elevated px-3 text-sm text-white placeholder:text-gray-500 focus:border-brand-500/50 focus:outline-none focus:ring-1 focus:ring-brand-500/30";
@@ -33,6 +38,9 @@ interface FundCardModalProps {
 
 export function FundCardModal({ card, open, onClose, onFunded }: FundCardModalProps) {
   const { summary } = useDashboard();
+  const accountCurrency = useAccountCurrency();
+  const formatMoney = useFormatAccountMoney();
+  const currencyPrefix = useCurrencyInputPrefix();
   const walletBalance = parseFloat(summary?.primary_wallet_balance ?? "0");
 
   const [amount, setAmount] = useState("");
@@ -45,17 +53,8 @@ export function FundCardModal({ card, open, onClose, onFunded }: FundCardModalPr
   const overWallet = amountNum > walletBalance;
   const belowMin = amountNum > 0 && amountNum < MIN_CARD_FUND_AMOUNT;
 
-  const fmtWallet = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  }).format(walletBalance);
-
-  const fmtCardBal = card
-    ? new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(card.balance)
-    : "";
+  const fmtWallet = formatMoney(walletBalance);
+  const fmtCardBal = card ? formatMoney(card.balance) : "";
 
   const canSubmit =
     !!card &&
@@ -101,7 +100,7 @@ export function FundCardModal({ card, open, onClose, onFunded }: FundCardModalPr
           <CheckCircle2 className="mx-auto h-12 w-12 text-emerald-400" />
           <p className="mt-3 font-medium text-white">Funds added successfully</p>
           <p className="mt-1 text-xs text-gray-500">
-            ${amountNum.toLocaleString(undefined, { minimumFractionDigits: 2 })} is now
+            {formatMoney(amountNum)} is now
             available on {card.name}.
           </p>
           <Button variant="secondary" size="sm" className="mt-4" onClick={onClose}>
@@ -139,11 +138,11 @@ export function FundCardModal({ card, open, onClose, onFunded }: FundCardModalPr
 
           <div>
             <label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-wider text-gray-500">
-              Amount to fund (USD)
+              Amount to fund ({accountCurrency})
             </label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-bold text-brand-400">
-                $
+                {currencyPrefix}
               </span>
               <input
                 type="text"
@@ -157,7 +156,7 @@ export function FundCardModal({ card, open, onClose, onFunded }: FundCardModalPr
               />
             </div>
             <p className="mt-1.5 text-[10px] text-gray-500">
-              Minimum ${MIN_CARD_FUND_AMOUNT.toFixed(2)}
+              Minimum {formatMoney(MIN_CARD_FUND_AMOUNT)}
             </p>
             {belowMin && (
               <p className="mt-1 flex items-center gap-1 text-xs text-amber-400">

@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { createSavingsGoal } from "@/lib/api/savings";
 import { getErrorMessage } from "@/lib/api/get-error-message";
 import { ApiError } from "@/lib/api/client";
+import { useAccountCurrency } from "@/hooks/use-account-currency";
 
 export function GoalCreateModal({
   open,
@@ -20,6 +21,7 @@ export function GoalCreateModal({
   onCreated?: () => void;
 }) {
   const queryClient = useQueryClient();
+  const accountCurrency = useAccountCurrency();
   const [name, setName] = useState("");
   const [target, setTarget] = useState("");
   const [deadline, setDeadline] = useState("");
@@ -71,7 +73,7 @@ export function GoalCreateModal({
             onChange={(e) => setName(e.target.value)}
           />
         </FormField>
-        <FormField label="Target amount (USD)" htmlFor="target">
+        <FormField label={`Target amount (${accountCurrency})`} htmlFor="target">
           <Input
             id="target"
             type="number"

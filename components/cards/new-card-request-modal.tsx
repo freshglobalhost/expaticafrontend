@@ -23,6 +23,9 @@ import {
   type VirtualCard,
   type CardNetwork,
 } from "@/lib/cards-mock-data";
+import {
+  useFormatAccountMoney,
+} from "@/hooks/use-account-currency";
 
 const DEFAULT_CARD_THEME = "teal-gold" as const;
 
@@ -54,10 +57,8 @@ export function NewCardRequestModal({
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
 
-  const fmtWallet = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  }).format(walletBalance);
+  const formatMoney = useFormatAccountMoney();
+  const fmtWallet = formatMoney(walletBalance);
 
   const canSubmit =
     name.trim().length >= 2 &&
@@ -114,7 +115,7 @@ export function NewCardRequestModal({
           <CheckCircle2 className="mx-auto h-12 w-12 text-emerald-400" />
           <p className="mt-3 font-medium text-white">Virtual card created</p>
           <p className="mt-1 text-xs text-gray-500">
-            ${NEW_CARD_REQUEST_FEE.toFixed(2)} issuance fee charged. Fund your card to
+            {formatMoney(NEW_CARD_REQUEST_FEE)} issuance fee charged. Fund your card to
             start spending.
           </p>
           <Button variant="secondary" size="sm" className="mt-4" onClick={onClose}>
@@ -133,7 +134,7 @@ export function NewCardRequestModal({
             <p className="flex items-start gap-2">
               <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
               <span>
-                One-time <strong className="text-white">${NEW_CARD_REQUEST_FEE.toFixed(2)}</strong>{" "}
+                One-time <strong className="text-white">{formatMoney(NEW_CARD_REQUEST_FEE)}</strong>{" "}
                 issuance fee per card. Instant virtual Visa/Mastercard — no physical card
                 shipped. Fund the card after creation to use it online.
               </span>
@@ -148,7 +149,7 @@ export function NewCardRequestModal({
           {walletBalance < NEW_CARD_REQUEST_FEE && (
             <p className="flex items-center gap-1 text-xs text-red-400">
               <AlertTriangle className="h-3.5 w-3.5" />
-              Insufficient balance for the ${NEW_CARD_REQUEST_FEE.toFixed(2)} fee
+              Insufficient balance for the {formatMoney(NEW_CARD_REQUEST_FEE)} fee
             </p>
           )}
 
@@ -187,7 +188,7 @@ export function NewCardRequestModal({
             <div className="mb-2 flex justify-between text-sm">
               <span className="text-gray-400">Monthly spending limit</span>
               <span className="font-bold text-white">
-                ${spendingLimit.toLocaleString()}
+                {formatMoney(spendingLimit, { maximumFractionDigits: 0 })}
               </span>
             </div>
             <Slider
@@ -207,7 +208,7 @@ export function NewCardRequestModal({
               className="mt-0.5 rounded border-white/20"
             />
             <span>
-              I agree to the ${NEW_CARD_REQUEST_FEE.toFixed(2)} issuance fee and virtual card
+              I agree to the {formatMoney(NEW_CARD_REQUEST_FEE)} issuance fee and virtual card
               terms.
             </span>
           </label>
@@ -224,7 +225,7 @@ export function NewCardRequestModal({
         <div className="mt-4 shrink-0 border-t border-white/5 pt-4">
           <div className="mb-3 flex justify-between text-sm">
             <span className="text-gray-500">Issuance fee</span>
-            <span className="font-bold text-white">${NEW_CARD_REQUEST_FEE.toFixed(2)}</span>
+            <span className="font-bold text-white">{formatMoney(NEW_CARD_REQUEST_FEE)}</span>
           </div>
           <Button type="submit" className="w-full" disabled={!canSubmit}>
             {loading ? (
@@ -235,7 +236,7 @@ export function NewCardRequestModal({
             ) : (
               <>
                 <Lock className="h-4 w-4" />
-                Request card — ${NEW_CARD_REQUEST_FEE.toFixed(2)}
+                Request card — {formatMoney(NEW_CARD_REQUEST_FEE)}
               </>
             )}
           </Button>

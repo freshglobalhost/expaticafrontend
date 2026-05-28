@@ -18,6 +18,11 @@ import {
   type VirtualCard,
 } from "@/lib/cards-mock-data";
 import { cn } from "@/lib/utils";
+import {
+  useAccountCurrency,
+  useCurrencyInputPrefix,
+  useFormatAccountMoney,
+} from "@/hooks/use-account-currency";
 
 const inputClass =
   "h-10 w-full rounded-xl border border-white/10 bg-surface-elevated px-3 text-sm text-white placeholder:text-gray-500 focus:border-brand-500/50 focus:outline-none focus:ring-1 focus:ring-brand-500/30";
@@ -35,6 +40,10 @@ export function WithdrawCardModal({
   onClose,
   onWithdrawn,
 }: WithdrawCardModalProps) {
+  const accountCurrency = useAccountCurrency();
+  const formatMoney = useFormatAccountMoney();
+  const currencyPrefix = useCurrencyInputPrefix();
+
   const [amount, setAmount] = useState("");
   const [pin, setPin] = useState("");
   const [loading, setLoading] = useState(false);
@@ -45,11 +54,7 @@ export function WithdrawCardModal({
   const overCard = amountNum > (card?.balance ?? 0);
   const belowMin = amountNum > 0 && amountNum < MIN_CARD_WITHDRAW_AMOUNT;
 
-  const fmtCardBal = card
-    ? new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
-        card.balance
-      )
-    : "";
+  const fmtCardBal = card ? formatMoney(card.balance) : "";
 
   const canSubmit =
     !!card &&
@@ -95,7 +100,7 @@ export function WithdrawCardModal({
           <CheckCircle2 className="mx-auto h-12 w-12 text-emerald-400" />
           <p className="mt-3 font-medium text-white">Funds returned to wallet</p>
           <p className="mt-1 text-xs text-gray-500">
-            ${amountNum.toLocaleString(undefined, { minimumFractionDigits: 2 })} moved from{" "}
+            {formatMoney(amountNum)} moved from{" "}
             {card.name} to your main balance.
           </p>
           <Button variant="secondary" size="sm" className="mt-4" onClick={onClose}>
@@ -127,11 +132,11 @@ export function WithdrawCardModal({
 
           <div>
             <label className="mb-1.5 block text-[10px] font-semibold uppercase tracking-wider text-gray-500">
-              Amount to withdraw (USD)
+              Amount to withdraw ({accountCurrency})
             </label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-bold text-brand-400">
-                $
+                {currencyPrefix}
               </span>
               <input
                 type="text"
@@ -145,7 +150,7 @@ export function WithdrawCardModal({
               />
             </div>
             <p className="mt-1.5 text-[10px] text-gray-500">
-              Minimum ${MIN_CARD_WITHDRAW_AMOUNT.toFixed(2)}
+              Minimum {formatMoney(MIN_CARD_WITHDRAW_AMOUNT)}
             </p>
             {belowMin && (
               <p className="mt-1 flex items-center gap-1 text-xs text-amber-400">

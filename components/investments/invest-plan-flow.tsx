@@ -25,19 +25,19 @@ import { FormField } from "@/components/auth/form-field";
 import { getErrorMessage } from "@/lib/api/get-error-message";
 import { ApiError } from "@/lib/api/client";
 import { cn } from "@/lib/utils";
-
-function fmt(n: number) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-  }).format(n);
-}
+import {
+  useAccountCurrency,
+  useCurrencyInputPrefix,
+  useFormatAccountMoney,
+} from "@/hooks/use-account-currency";
 
 export function InvestPlanFlow({ planId }: { planId: string }) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const { summary, refetch } = useDashboard();
+  const accountCurrency = useAccountCurrency();
+  const formatMoney = useFormatAccountMoney();
+  const currencyPrefix = useCurrencyInputPrefix();
   const planQuery = useQuery({
     queryKey: ["investment-plan", planId],
     queryFn: () => getInvestmentPlan(planId),
@@ -134,7 +134,7 @@ export function InvestPlanFlow({ planId }: { planId: string }) {
           <p className="text-[10px] font-semibold uppercase tracking-wider text-gray-500">
             Available balance
           </p>
-          <p className="text-lg font-bold text-white">{fmt(maxBal)}</p>
+          <p className="text-lg font-bold text-white">{formatMoney(maxBal)}</p>
         </div>
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500/15">
           <Wallet className="h-5 w-5 text-brand-400" />
@@ -154,8 +154,8 @@ export function InvestPlanFlow({ planId }: { planId: string }) {
 
         <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
           {[
-            { label: "Minimum", value: fmt(plan.minAmount) },
-            { label: "Maximum", value: fmt(plan.maxAmount) },
+            { label: "Minimum", value: formatMoney(plan.minAmount) },
+            { label: "Maximum", value: formatMoney(plan.maxAmount) },
             { label: "ROI", value: plan.roiDisplay, green: true },
             { label: "Duration", value: plan.duration },
             {
@@ -211,8 +211,8 @@ export function InvestPlanFlow({ planId }: { planId: string }) {
             />
           </div>
           <div className="mt-1.5 flex justify-between text-[10px] text-gray-500">
-            <span>Min: {fmt(plan.minAmount)}</span>
-            <span>Max: {fmt(plan.maxAmount)}</span>
+            <span>Min: {formatMoney(plan.minAmount)}</span>
+            <span>Max: {formatMoney(plan.maxAmount)}</span>
           </div>
           {(overMax || overBalance || belowMin) && amountNum > 0 && (
             <p className="mt-1 text-xs text-red-400">
@@ -239,15 +239,15 @@ export function InvestPlanFlow({ planId }: { planId: string }) {
           <div className="mt-4 space-y-2 rounded-lg border border-white/5 bg-white/[0.02] p-3 text-sm">
             <div className="flex justify-between text-gray-400">
               <span>Your investment</span>
-              <span className="font-semibold text-white">{fmt(amountNum)}</span>
+              <span className="font-semibold text-white">{formatMoney(amountNum)}</span>
             </div>
             <div className="flex justify-between text-gray-400">
               <span>Expected ROI</span>
-              <span className="font-semibold text-white">{fmt(expectedRoi)}</span>
+              <span className="font-semibold text-white">{formatMoney(expectedRoi)}</span>
             </div>
             <div className="flex justify-between border-t border-white/5 pt-2">
               <span className="font-semibold text-white">Total return</span>
-              <span className="font-bold text-emerald-400">{fmt(totalReturn)}</span>
+              <span className="font-bold text-emerald-400">{formatMoney(totalReturn)}</span>
             </div>
           </div>
 
@@ -260,7 +260,7 @@ export function InvestPlanFlow({ planId }: { planId: string }) {
             />
             <span className="text-xs text-gray-400">
               I understand that my investment of{" "}
-              <strong className="text-white">{fmt(amountNum || 0)}</strong> will be locked for{" "}
+              <strong className="text-white">{formatMoney(amountNum || 0)}</strong> will be locked for{" "}
               <strong className="text-white">{plan.lockLabel}</strong> and returns will be
               automatically credited after the duration.
             </span>

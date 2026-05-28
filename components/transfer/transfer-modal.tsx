@@ -26,6 +26,11 @@ import { createTransfer } from "@/lib/api/banking";
 import { getErrorMessage } from "@/lib/api/get-error-message";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import {
+  useAccountCurrency,
+  useCurrencyInputPrefix,
+  useFormatAccountMoney,
+} from "@/hooks/use-account-currency";
 
 const inputClass =
   "h-10 w-full rounded-xl border border-white/10 bg-surface-elevated px-3 text-sm text-white placeholder:text-gray-500 focus:border-brand-500/50 focus:outline-none focus:ring-1 focus:ring-brand-500/30";
@@ -138,14 +143,15 @@ function TransferForm({
     setReference(null);
   }, [methodId]);
 
+  const accountCurrency = useAccountCurrency();
+  const formatMoney = useFormatAccountMoney();
+  const currencyPrefix = useCurrencyInputPrefix();
+
   const maxBal = parseFloat(summary?.primary_wallet_balance ?? summary?.total_balance ?? "0") || 0;
   const amountNum = parseFloat(amount) || 0;
   const overBalance = amountNum > maxBal;
 
-  const fmtBal = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: summary?.currency_code ?? "USD",
-  }).format(maxBal);
+  const fmtBal = formatMoney(maxBal);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -226,6 +232,8 @@ function TransferForm({
         fmtBal={fmtBal}
         overBalance={overBalance}
         processingNote={processingNote}
+        currencyCode={accountCurrency}
+        currencyPrefix={currencyPrefix}
       />
 
       <Section icon={ShieldCheck} title="Secure transaction" accent="amber">
@@ -423,6 +431,8 @@ function AmountSection({
   fmtBal,
   overBalance,
   processingNote,
+  currencyCode,
+  currencyPrefix,
 }: {
   amount: string;
   onAmountChange: (v: string) => void;
@@ -430,12 +440,14 @@ function AmountSection({
   fmtBal: string;
   overBalance: boolean;
   processingNote: string;
+  currencyCode: string;
+  currencyPrefix: string;
 }) {
   return (
     <Section icon={Banknote} title="Transfer amount" accent="brand">
       <div className="relative">
         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-bold text-brand-400">
-          USD
+          {currencyPrefix}
         </span>
         <input
           type="text"
@@ -446,7 +458,8 @@ function AmountSection({
             const v = e.target.value.replace(/[^\d.]/g, "");
             onAmountChange(v);
           }}
-          className={cn(inputClass, "pl-12 text-lg font-bold")}
+          className={cn(inputClass, "pl-14 text-lg font-bold")}
+          aria-label={`Amount in ${currencyCode}`}
           placeholder="0.00"
           autoComplete="off"
           name="transfer-amount"

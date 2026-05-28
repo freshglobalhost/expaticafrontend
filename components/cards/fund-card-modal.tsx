@@ -20,6 +20,7 @@ import {
   type VirtualCard,
 } from "@/lib/cards-mock-data";
 import { cn } from "@/lib/utils";
+import { sanitizeAmountInput } from "@/lib/currency";
 import {
   useAccountCurrency,
   useCurrencyInputPrefix,
@@ -148,9 +149,9 @@ export function FundCardModal({ card, open, onClose, onFunded }: FundCardModalPr
                 type="text"
                 inputMode="decimal"
                 value={amount}
-                onChange={(e) => setAmount(e.target.value.replace(/[^\d.]/g, ""))}
+                onChange={(e) => setAmount(sanitizeAmountInput(e.target.value))}
                 className={cn(inputClass, "pl-8 text-lg font-bold")}
-                placeholder="0.00"
+                placeholder="0"
                 autoComplete="off"
                 required
               />

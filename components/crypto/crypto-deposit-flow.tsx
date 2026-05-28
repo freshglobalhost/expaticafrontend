@@ -22,6 +22,7 @@ import {
 import { useDashboard } from "@/components/providers/dashboard-provider";
 import { DepositQrImage } from "./deposit-qr-image";
 import { cn } from "@/lib/utils";
+import { sanitizeAmountInput } from "@/lib/currency";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -202,7 +203,7 @@ export function CryptoDepositFlow() {
                   required
                   placeholder={`Min ${asset.minDeposit}`}
                   value={cryptoAmount}
-                  onChange={(e) => setCryptoAmount(e.target.value.replace(/[^\d.]/g, ""))}
+                  onChange={(e) => setCryptoAmount(sanitizeAmountInput(e.target.value, 8))}
                   className="mt-2"
                 />
               </div>

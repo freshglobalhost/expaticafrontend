@@ -18,6 +18,7 @@ import { getErrorMessage } from "@/lib/api/get-error-message";
 import { useDashboard } from "@/components/providers/dashboard-provider";
 import type { ApiAssignedBankAccount } from "@/lib/api/types";
 import { cn } from "@/lib/utils";
+import { sanitizeAmountInput } from "@/lib/currency";
 
 const inputClass =
   "h-10 w-full rounded-xl border border-white/10 bg-surface-elevated px-3 text-sm text-white placeholder:text-gray-500 focus:border-brand-500/50 focus:outline-none focus:ring-1 focus:ring-brand-500/30";
@@ -193,8 +194,8 @@ export function LocalDepositFlow() {
           min="0.01"
           step="0.01"
           value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          placeholder="0.00"
+          onChange={(e) => setAmount(sanitizeAmountInput(e.target.value))}
+          placeholder="0"
           className={inputClass}
           required
         />

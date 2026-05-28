@@ -17,6 +17,25 @@ export function formatAccountMoney(
   }
 }
 
+/**
+ * Sanitize free-text decimal amount input — never leave a lone "." in the field.
+ */
+export function sanitizeAmountInput(raw: string, maxDecimals = 2): string {
+  const v = raw.replace(/[^\d.]/g, "");
+  if (!v || v === ".") return "";
+
+  const dot = v.indexOf(".");
+  if (dot === -1) return v;
+
+  const intPart = v.slice(0, dot);
+  const decPart = v.slice(dot + 1).replace(/\./g, "").slice(0, maxDecimals);
+
+  if (decPart.length === 0 && v.endsWith(".")) {
+    return intPart.length > 0 ? `${intPart}.` : "";
+  }
+  return decPart.length > 0 ? `${intPart}.${decPart}` : intPart;
+}
+
 /** Prefix shown inside amount inputs (symbol or ISO code). */
 export function getCurrencyInputPrefix(currency: string): string {
   if (currency === "USD") return "$";

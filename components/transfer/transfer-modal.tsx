@@ -26,6 +26,7 @@ import { createTransfer } from "@/lib/api/banking";
 import { getErrorMessage } from "@/lib/api/get-error-message";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { sanitizeAmountInput } from "@/lib/currency";
 import {
   useAccountCurrency,
   useCurrencyInputPrefix,
@@ -454,13 +455,10 @@ function AmountSection({
           inputMode="decimal"
           required
           value={amount}
-          onChange={(e) => {
-            const v = e.target.value.replace(/[^\d.]/g, "");
-            onAmountChange(v);
-          }}
+          onChange={(e) => onAmountChange(sanitizeAmountInput(e.target.value))}
           className={cn(inputClass, "pl-14 text-lg font-bold")}
           aria-label={`Amount in ${currencyCode}`}
-          placeholder="0.00"
+          placeholder="0"
           autoComplete="off"
           name="transfer-amount"
         />

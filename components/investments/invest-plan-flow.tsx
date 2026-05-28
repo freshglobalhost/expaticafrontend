@@ -25,6 +25,7 @@ import { FormField } from "@/components/auth/form-field";
 import { getErrorMessage } from "@/lib/api/get-error-message";
 import { ApiError } from "@/lib/api/client";
 import { cn } from "@/lib/utils";
+import { sanitizeAmountInput } from "@/lib/currency";
 import {
   useAccountCurrency,
   useCurrencyInputPrefix,
@@ -201,12 +202,11 @@ export function InvestPlanFlow({ planId }: { planId: string }) {
               $
             </span>
             <input
-              type="number"
-              min={0}
-              step="0.01"
+              type="text"
+              inputMode="decimal"
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder="0.00"
+              onChange={(e) => setAmount(sanitizeAmountInput(e.target.value))}
+              placeholder="0"
               className="h-11 w-full rounded-xl border border-white/10 bg-surface-elevated pl-8 pr-3 text-lg font-bold text-white placeholder:text-gray-600 focus:border-brand-500/50 focus:outline-none"
             />
           </div>

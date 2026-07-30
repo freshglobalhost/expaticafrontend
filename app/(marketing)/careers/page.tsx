@@ -6,9 +6,9 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Careers",
   description:
-    "Careers at PennyCredit — join our team building premium digital banking, lending, and investment products. Remote and hybrid roles in engineering, design, risk, and support.",
+    "Careers at Expatica — join our team building premium digital banking, lending, and investment products. Remote and hybrid roles in engineering, design, risk, and support.",
   path: "/careers",
-  keywords: ["PennyCredit jobs", "fintech careers", "remote engineering jobs"],
+  keywords: ["Expatica jobs", "fintech careers", "remote engineering jobs"],
 });
 
 const ROLES = [
@@ -45,8 +45,8 @@ export default function CareersPage() {
       </ul>
       <p>
         Don&apos;t see a fit? Email{" "}
-        <Link href="mailto:careers@pennycredit.com" className="text-brand-400 hover:underline">
-          careers@pennycredit.com
+        <Link href="mailto:careers@expaticaonline.com" className="text-brand-400 hover:underline">
+          careers@expaticaonline.com
         </Link>{" "}
         with your background and what you would like to build.
       </p>

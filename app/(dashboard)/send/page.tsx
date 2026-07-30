@@ -1,7 +1,7 @@
 import { PageHeader } from "@/components/dashboard/page-header";
 import { SendMoneyPageSection } from "@/components/transfer/send-money-page-section";
 
-export const metadata = { title: "Send money — PennyCredit" };
+export const metadata = { title: "Send money — Expatica" };
 
 export default function SendMoneyPage() {
   return (

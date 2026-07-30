@@ -65,7 +65,7 @@ export function DashboardSidebar({ onNavigate }: { onNavigate?: () => void }) {
             <LogoIcon className="h-4 w-4 text-white" />
           </div>
           <span className="font-display text-lg font-bold text-white">
-            Penny<span className="text-brand-400">Credit</span>
+            Expati<span className="text-brand-400">ca</span>
           </span>
         </Link>
 

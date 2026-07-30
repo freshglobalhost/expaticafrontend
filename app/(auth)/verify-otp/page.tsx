@@ -3,7 +3,7 @@ import { OtpVerificationForm } from "@/components/auth/otp-verification-form";
 import { Loader2 } from "lucide-react";
 
 export const metadata = {
-  title: "Verify Code — PennyCredit",
+  title: "Verify Code — Expatica",
 };
 
 function OtpFallback() {

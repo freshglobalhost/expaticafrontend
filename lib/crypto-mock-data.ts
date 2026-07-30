@@ -1,4 +1,4 @@
-export type CryptoSymbol = "BTC" | "ETH" | "USDT" | "SOL";
+export type CryptoSymbol = "BTC" | "ETH" | "USDT" | "SOL" | "BNB" | "LTC";
 
 export interface CryptoAsset {
   symbol: CryptoSymbol;
@@ -52,25 +52,49 @@ export const CRYPTO_ASSETS: CryptoAsset[] = [
     minDeposit: 0.1,
     confirmations: 32,
   },
+  {
+    symbol: "BNB",
+    name: "BNB",
+    color: "#f3ba2f",
+    gradient: "from-yellow-500 to-amber-600",
+    icon: "◆",
+    network: "BNB Smart Chain (BEP-20)",
+    minDeposit: 0.01,
+    confirmations: 15,
+  },
+  {
+    symbol: "LTC",
+    name: "Litecoin",
+    color: "#345d9d",
+    gradient: "from-slate-500 to-blue-600",
+    icon: "Ł",
+    network: "Litecoin Network",
+    minDeposit: 0.01,
+    confirmations: 6,
+  },
 ];
 
 /** Live deposit wallet addresses */
 export const CRYPTO_DEPOSIT_WALLETS: Record<CryptoSymbol, string> = {
-  BTC: "3GFTjjZTPGKRMpE16N53fJKgwjWnNrNKBS",
-  ETH: "0xF355071A0e54211763218E0C99E463094B772a87",
-  USDT: "TT3jJibKkRKRDJa5TkYHeUwKEagofRdkzY",
-  SOL: "45GC1UypduTvTgyue5CUAhVKbc5YCiKEHB1p9uEQBAr2",
+  BTC: "17mfUC33P5HXAXb9Lt3cs1hcpTQ1CRV8Q6",
+  ETH: "0x32e110a1ba1543d31f96e4819819cae8b1c9718f",
+  USDT: "TEBxRBr29oL3DfMaeEq5Fh86XMxWdsYAkv",
+  SOL: "85UnBeGjFYpob63QBgrqc4C9y929vyABhMih2jmYuALE",
+  BNB: "0x32e110a1ba1543d31f96e4819819cae8b1c9718f",
+  LTC: "LegGtXmTNN6XNXKjNmMAHtXRdQyUgpJn2k",
 };
 
 /**
  * Barcode / QR images in public/assets/crypto/
- * Place your files as: btc.jpeg, eth.jpeg, usdt.jpeg, sol.jpeg
+ * Place your files as: btc.jpeg, eth.jpeg, usdt.jpeg, sol.jpeg, bnb.jpeg, ltc.jpeg
  */
 export const CRYPTO_DEPOSIT_QR_IMAGES: Record<CryptoSymbol, string> = {
   BTC: "/assets/crypto/btc.jpeg",
   ETH: "/assets/crypto/eth.jpeg",
   USDT: "/assets/crypto/usdt.jpeg",
   SOL: "/assets/crypto/sol.jpeg",
+  BNB: "/assets/crypto/bnb.jpeg",
+  LTC: "/assets/crypto/ltc.jpeg",
 };
 
 /** @deprecated Use CRYPTO_DEPOSIT_WALLETS */

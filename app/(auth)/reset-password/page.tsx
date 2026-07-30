@@ -1,7 +1,7 @@
 import { ResetPasswordForm } from "@/components/auth/reset-password-form";
 
 export const metadata = {
-  title: "Reset Password — PennyCredit",
+  title: "Reset Password — Expatica",
 };
 
 export default function ResetPasswordPage() {

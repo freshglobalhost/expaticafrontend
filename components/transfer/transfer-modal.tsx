@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 import { PinInput } from "@/components/auth/pin-input";
 import {
-  getTransferMethod,
   type TransferMethodId,
 } from "@/lib/transfer-methods";
 import { useDashboard } from "@/components/providers/dashboard-provider";
@@ -39,7 +38,11 @@ const inputClass =
 const labelClass = "mb-1.5 block text-[10px] font-semibold uppercase tracking-wider text-gray-500";
 
 interface TransferModalProps {
-  methodId: TransferMethodId | null;
+  method: {
+    id: TransferMethodId;
+    label: string;
+    subtitle: string;
+  } | null;
   methodApiId?: number | null;
   onClose: () => void;
 }
@@ -56,8 +59,7 @@ function collectRecipientDetails(form: HTMLFormElement) {
   return details;
 }
 
-export function TransferModal({ methodId, methodApiId, onClose }: TransferModalProps) {
-  const method = methodId ? getTransferMethod(methodId) : null;
+export function TransferModal({ method, methodApiId, onClose }: TransferModalProps) {
   const open = !!method;
 
   return (
@@ -158,7 +160,7 @@ function TransferForm({
     e.preventDefault();
     if (pin.length !== 4 || amountNum < 1 || overBalance) return;
     if (!methodApiId) {
-      setError("This transfer method is not available. Please try again later.");
+      setError("Unable to send right now. Please try again in a moment.");
       return;
     }
 

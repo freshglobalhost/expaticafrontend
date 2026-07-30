@@ -3,9 +3,9 @@ import { Navbar } from "@/components/layout/navbar";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "PennyCredit — Premium Digital Banking, Loans & Investments",
+  title: "Expatica — Premium Digital Banking, Loans & Investments",
   description:
-    "Bank smarter with PennyCredit: instant loans, savings and investment plans, virtual Visa & Mastercard cards, crypto deposits, and low-fee global transfers in one secure app.",
+    "Bank smarter with Expatica: instant loans, savings and investment plans, virtual Visa & Mastercard cards, crypto deposits, and low-fee global transfers in one secure app.",
   path: "/",
   keywords: [
     "open digital bank account",

@@ -3,21 +3,21 @@ import { MarketingPageShell } from "@/components/layout/marketing-page-shell";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "About PennyCredit",
+  title: "About Expatica",
   description:
-    "Learn about PennyCredit — a premium fintech platform combining digital banking, fast loans, investments, virtual cards, and crypto services for customers worldwide.",
+    "Learn about Expatica — a premium fintech platform combining digital banking, fast loans, investments, virtual cards, and crypto services for customers worldwide.",
   path: "/about",
-  keywords: ["about PennyCredit", "fintech company", "digital bank"],
+  keywords: ["about Expatica", "fintech company", "digital bank"],
 });
 
 export default function AboutPage() {
   return (
     <MarketingPageShell
-      title="About PennyCredit"
+      title="About Expatica"
       subtitle="Premium digital banking built for a global financial life"
     >
       <p>
-        PennyCredit is a premium fintech platform that unifies digital banking, instant loans,
+        Expatica is a premium fintech platform that unifies digital banking, instant loans,
         investments, virtual cards, and crypto — in one secure, elegant experience.
       </p>
       <h2 className="font-display text-xl font-semibold text-white">Our mission</h2>

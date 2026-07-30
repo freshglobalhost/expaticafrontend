@@ -1,6 +1,6 @@
 import { TransactionPinSettings } from "@/components/settings/transaction-pin-settings";
 
-export const metadata = { title: "Transaction PIN — PennyCredit" };
+export const metadata = { title: "Transaction PIN — Expatica" };
 
 export default function TransactionPinSettingsPage() {
   return (

@@ -15,7 +15,6 @@ export interface TransferMethod {
   image: string;
 }
 
-const IMG = "https://grandwellsbank.com/dash2/app/assets/img/sample/brand";
 const LOCAL = "/assets/transfer-brands";
 
 /** Primary send methods — first row */
@@ -24,7 +23,7 @@ export const PRIMARY_SEND_OPTIONS: TransferMethod[] = [
     id: "wire",
     label: "Wire Transfer",
     subtitle: "International bank transfer",
-    image: `${IMG}/jh.png`,
+    image: `${LOCAL}/wire.svg`,
   },
   {
     id: "local",
@@ -36,13 +35,13 @@ export const PRIMARY_SEND_OPTIONS: TransferMethod[] = [
     id: "paypal",
     label: "PayPal",
     subtitle: "Send via PayPal",
-    image: `${IMG}/pa.png`,
+    image: `${LOCAL}/paypal.svg`,
   },
   {
     id: "skrill",
     label: "Skrill",
     subtitle: "Send via Skrill",
-    image: `${IMG}/s.png`,
+    image: `${LOCAL}/skrill.svg`,
   },
 ];
 
@@ -58,19 +57,19 @@ export const MORE_SEND_OPTIONS: TransferMethod[] = [
     id: "western",
     label: "Western Union",
     subtitle: "Cash pickup",
-    image: `${IMG}/yu.png`,
+    image: `${LOCAL}/western-union.svg`,
   },
   {
     id: "wise",
     label: "Wise",
     subtitle: "Low-fee transfer",
-    image: `${IMG}/22.png`,
+    image: `${LOCAL}/wise.svg`,
   },
   {
     id: "payoneer",
     label: "Payoneer",
     subtitle: "Business payments",
-    image: `${IMG}/34.png`,
+    image: `${LOCAL}/payoneer.svg`,
   },
 ];
 
@@ -80,25 +79,25 @@ export const DASHBOARD_SEND_OPTIONS: TransferMethod[] = [
     id: "wire",
     label: "Wire Transfer",
     subtitle: "International bank transfer",
-    image: `${IMG}/jh.png`,
+    image: `${LOCAL}/wire.svg`,
   },
   {
     id: "paypal",
     label: "PayPal",
     subtitle: "Send via PayPal",
-    image: `${IMG}/pa.png`,
+    image: `${LOCAL}/paypal.svg`,
   },
   {
     id: "skrill",
     label: "Skrill",
     subtitle: "Send via Skrill",
-    image: `${IMG}/s.png`,
+    image: `${LOCAL}/skrill.svg`,
   },
   {
     id: "wise",
     label: "Wise",
     subtitle: "Low-fee transfer",
-    image: `${IMG}/22.png`,
+    image: `${LOCAL}/wise.svg`,
   },
 ];
 

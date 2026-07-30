@@ -5,7 +5,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Privacy Policy",
   description:
-    "PennyCredit Privacy Policy — how we collect, use, store, and protect your personal data when you use our banking, loan, and investment services.",
+    "Expatica Privacy Policy — how we collect, use, store, and protect your personal data when you use our banking, loan, and investment services.",
   path: "/privacy",
   keywords: ["privacy policy", "data protection", "GDPR"],
 });
@@ -14,7 +14,7 @@ export default function PrivacyPage() {
   return (
     <MarketingPageShell title="Privacy Policy" subtitle="Last updated: May 2026">
       <p>
-        PennyCredit (&quot;we&quot;, &quot;us&quot;) respects your privacy. This policy explains what
+        Expatica (&quot;we&quot;, &quot;us&quot;) respects your privacy. This policy explains what
         information we collect, how we use it, and your rights regarding personal data.
       </p>
       <h2 className="font-display text-xl font-semibold text-white">Information we collect</h2>
@@ -31,7 +31,7 @@ export default function PrivacyPage() {
       <h2 className="font-display text-xl font-semibold text-white">Your rights</h2>
       <p>
         Depending on your jurisdiction, you may request access, correction, deletion, or
-        portability of your personal data. Contact privacy@pennycredit.com to exercise these
+        portability of your personal data. Contact privacy@expaticaonline.com to exercise these
         rights.
       </p>
     </MarketingPageShell>

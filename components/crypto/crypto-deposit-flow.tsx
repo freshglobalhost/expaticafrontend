@@ -116,7 +116,7 @@ export function CryptoDepositFlow() {
       <div className="space-y-4">
         <div>
           <p className="mb-2 text-xs font-medium text-gray-400">Select cryptocurrency</p>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
             {DEPOSIT_ASSETS.map((c) => (
               <button
                 key={c.symbol}

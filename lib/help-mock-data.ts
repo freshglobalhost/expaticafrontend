@@ -1,5 +1,5 @@
 export const HELP_ARTICLES = [
-  { slug: "getting-started", title: "Getting started with PennyCredit", category: "Basics", excerpt: "Open an account, verify identity, and fund your wallet in minutes." },
+  { slug: "getting-started", title: "Getting started with Expatica", category: "Basics", excerpt: "Open an account, verify identity, and fund your wallet in minutes." },
   { slug: "loans-guide", title: "How to apply for a loan", category: "Loans", excerpt: "Step-by-step guide to personal, business, and emergency loans." },
   { slug: "virtual-cards", title: "Using virtual cards", category: "Cards", excerpt: "Create, freeze, and manage spending limits on virtual cards." },
   { slug: "crypto-deposits", title: "Crypto deposits explained", category: "Crypto", excerpt: "Supported assets, networks, and confirmation times." },

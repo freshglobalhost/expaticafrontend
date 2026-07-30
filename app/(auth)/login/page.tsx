@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Sign In",
   description:
-    "Sign in to your PennyCredit account to access digital banking, loans, investments, virtual cards, and secure money transfers.",
+    "Sign in to your Expatica account to access digital banking, loans, investments, virtual cards, and secure money transfers.",
   path: "/login",
   index: false,
 });

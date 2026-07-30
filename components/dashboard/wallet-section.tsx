@@ -21,6 +21,9 @@ const CRYPTO_COLORS: Record<string, string> = {
   BTC: "text-orange-400",
   ETH: "text-purple-400",
   USDT: "text-emerald-400",
+  SOL: "text-violet-400",
+  BNB: "text-yellow-400",
+  LTC: "text-blue-400",
 };
 
 export function WalletSection() {
@@ -33,6 +36,9 @@ export function WalletSection() {
     { symbol: "BTC", amount: parseFloat(summary?.btc_balance ?? "0") },
     { symbol: "ETH", amount: parseFloat(summary?.eth_balance ?? "0") },
     { symbol: "USDT", amount: parseFloat(summary?.usdt_balance ?? "0") },
+    { symbol: "SOL", amount: parseFloat(summary?.sol_balance ?? "0") },
+    { symbol: "BNB", amount: parseFloat(summary?.bnb_balance ?? "0") },
+    { symbol: "LTC", amount: parseFloat(summary?.ltc_balance ?? "0") },
   ];
 
   return (
@@ -80,7 +86,7 @@ export function WalletSection() {
           </Link>
         </div>
 
-        <div className="relative mt-4 grid grid-cols-3 gap-2 border-t border-white/15 pt-3">
+        <div className="relative mt-4 grid grid-cols-3 gap-2 border-t border-white/15 pt-3 sm:grid-cols-6">
           {cryptoBalances.map((c) => (
             <div key={c.symbol} className="text-center">
               <p className={cn("text-xs font-bold", CRYPTO_COLORS[c.symbol] ?? "text-white")}>

@@ -268,7 +268,7 @@ export function SignupForm() {
               {...register("agreeTerms")}
             />
             <span>
-              I agree to PennyCredit&apos;s{" "}
+              I agree to Expatica&apos;s{" "}
               <Link href="/terms" className="text-brand-400 hover:underline">
                 Terms & Conditions
               </Link>{" "}

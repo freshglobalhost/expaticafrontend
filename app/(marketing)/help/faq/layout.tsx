@@ -6,9 +6,9 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Frequently Asked Questions",
   description:
-    "Answers to common PennyCredit questions about loans, virtual cards, crypto deposits, transaction PIN, insurance, and account security.",
+    "Answers to common Expatica questions about loans, virtual cards, crypto deposits, transaction PIN, insurance, and account security.",
   path: "/help/faq",
-  keywords: ["PennyCredit FAQ", "loan FAQ", "virtual card help"],
+  keywords: ["Expatica FAQ", "loan FAQ", "virtual card help"],
 });
 
 export default function HelpFaqLayout({ children }: { children: React.ReactNode }) {

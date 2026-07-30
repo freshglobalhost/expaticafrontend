@@ -107,7 +107,7 @@ export function VirtualCardVisual({
             </div>
           </div>
           <p className="mt-auto text-center text-xs text-white/40">
-            PennyCredit Virtual · Not a physical card
+            Expatica Virtual · Not a physical card
           </p>
         </div>
       </motion.div>

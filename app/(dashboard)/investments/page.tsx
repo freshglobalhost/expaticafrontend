@@ -4,7 +4,7 @@ import { AvailablePlans } from "@/components/investments/available-plans";
 import { INVESTMENT_NAV } from "@/lib/investments-mock-data";
 
 export const metadata = {
-  title: "Investment Plans — PennyCredit",
+  title: "Investment Plans — Expatica",
 };
 
 export default function InvestmentsPage() {

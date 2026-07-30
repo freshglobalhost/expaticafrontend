@@ -24,12 +24,15 @@ export function SendMoneyPicker({
 }) {
   const [transferType, setTransferType] = useState<TransferMethodId | null>(null);
   const mergeOptions: MergeTransferMethodsOptions = { allowApiExtras };
-  const { methods: allMethods, isLoading, isReady } = useTransferMethods(
+  const { methods: allMethods, isLoading } = useTransferMethods(
     uiMethods,
     mergeOptions
   );
 
   const methodApiId = getApiIdForMethod(allMethods, transferType);
+  const selectedMethod = transferType
+    ? allMethods.find((m) => m.id === transferType) ?? null
+    : null;
 
   const renderGrid = (list: MergedTransferMethod[]) => (
     <div className={columnsClass}>
@@ -38,11 +41,7 @@ export function SendMoneyPicker({
           key={m.id}
           method={m}
           index={i}
-          disabled={isReady && m.apiId == null}
-          onClick={() => {
-            if (isReady && m.apiId == null) return;
-            setTransferType(m.id);
-          }}
+          onClick={() => setTransferType(m.id)}
         />
       ))}
     </div>
@@ -76,7 +75,7 @@ export function SendMoneyPicker({
           })}
         </div>
         <TransferModal
-          methodId={transferType}
+          method={selectedMethod}
           methodApiId={methodApiId}
           onClose={() => setTransferType(null)}
         />
@@ -88,7 +87,7 @@ export function SendMoneyPicker({
     <>
       {renderGrid(allMethods)}
       <TransferModal
-        methodId={transferType}
+        method={selectedMethod}
         methodApiId={methodApiId}
         onClose={() => setTransferType(null)}
       />

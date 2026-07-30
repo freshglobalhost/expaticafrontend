@@ -86,7 +86,7 @@ export function MoneyFlowForm({ type }: { type: FlowType }) {
           <select className={inputClass} defaultValue="wire">
             <option value="wire">International wire</option>
             <option value="local">Local bank transfer</option>
-            <option value="internal">PennyCredit user</option>
+            <option value="internal">Expatica user</option>
           </select>
         </Field>
       )}

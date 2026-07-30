@@ -6,9 +6,9 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Help Center",
   description:
-    "PennyCredit Help Center — guides for accounts, loans, cards, investments, crypto deposits, transfers, security, and transaction PIN support.",
+    "Expatica Help Center — guides for accounts, loans, cards, investments, crypto deposits, transfers, security, and transaction PIN support.",
   path: "/help",
-  keywords: ["PennyCredit help", "customer support", "banking FAQ"],
+  keywords: ["Expatica help", "customer support", "banking FAQ"],
 });
 
 export default function HelpPage() {

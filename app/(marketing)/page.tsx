@@ -6,14 +6,15 @@ import { LoanCalculator } from "@/components/home/loan-calculator";
 import { FeaturesSection } from "@/components/home/features-section";
 import { TestimonialsSection } from "@/components/home/testimonials-section";
 import { FAQSection } from "@/components/home/faq-section";
+import { TrustAssetsSection } from "@/components/home/trust-assets-section";
 import { Footer } from "@/components/home/footer";
 import { HomePageJsonLd } from "@/components/seo/json-ld";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "PennyCredit — Instant Loans, Banking, Cards & Investments",
+  title: "Expatica — Instant Loans, Banking, Cards & Investments",
   description:
-    "Join PennyCredit for premium digital banking: get personal and business loans in minutes, grow wealth with curated investment plans, spend with virtual cards, deposit crypto, and send money worldwide with transparent fees.",
+    "Join Expatica for premium digital banking: get personal and business loans in minutes, grow wealth with curated investment plans, spend with virtual cards, deposit crypto, and send money worldwide with transparent fees.",
   path: "/",
   keywords: [
     "instant personal loan",
@@ -33,6 +34,7 @@ export default function HomePage() {
       <ProductsSection />
       <LoanCalculator />
       <FeaturesSection />
+      <TrustAssetsSection />
       <TestimonialsSection />
       <FAQSection />
       <Footer />

@@ -9,7 +9,7 @@ const testimonials = [
     name: "Sarah Mitchell",
     role: "Small Business Owner, London",
     content:
-      "PennyCredit approved my business loan in 4 minutes. The dashboard is gorgeous and the rates beat every bank I compared. This feels like banking from 2030.",
+      "Expatica approved my business loan in 4 minutes. The dashboard is gorgeous and the rates beat every bank I compared. This feels like banking from 2030.",
     rating: 5,
     avatar: "SM",
   },
@@ -105,7 +105,7 @@ const testimonials = [
     name: "Thabo Nkosi",
     role: "Entrepreneur, Johannesburg",
     content:
-      "From Cape Town suppliers to Joburg payroll, transfers land fast and fees stay low. PennyCredit feels built for how we actually run business in South Africa.",
+      "From Cape Town suppliers to Joburg payroll, transfers land fast and fees stay low. Expatica feels built for how we actually run business in South Africa.",
     rating: 5,
     avatar: "TN",
   },
@@ -129,7 +129,7 @@ const testimonials = [
     name: "Marcus Baptiste",
     role: "Freelancer, San Fernando",
     content:
-      "Clients abroad pay me through PennyCredit and I withdraw locally without drama. Virtual cards for subscriptions are a bonus I use every week.",
+      "Clients abroad pay me through Expatica and I withdraw locally without drama. Virtual cards for subscriptions are a bonus I use every week.",
     rating: 5,
     avatar: "MB",
   },

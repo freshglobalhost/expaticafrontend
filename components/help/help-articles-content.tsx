@@ -39,7 +39,7 @@ export function HelpArticlesContent() {
         </Link>
         <h1 className="mt-4 font-display text-3xl font-bold text-white">Help articles</h1>
         <p className="mt-2 text-sm text-gray-400">
-          Step-by-step guides for using PennyCredit.
+          Step-by-step guides for using Expatica.
         </p>
 
         <div className="mt-6 flex flex-wrap gap-2">

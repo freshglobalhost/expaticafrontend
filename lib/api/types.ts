@@ -43,6 +43,8 @@ export type ApiWallet = {
   eth_balance: string;
   usdt_balance: string;
   sol_balance: string;
+  bnb_balance: string;
+  ltc_balance: string;
   created_at: string;
   updated_at: string;
 };
@@ -195,6 +197,8 @@ export type DashboardSummary = {
   eth_balance: string;
   usdt_balance: string;
   sol_balance: string;
+  bnb_balance: string;
+  ltc_balance: string;
   recent_transactions: ApiTransaction[];
   recent_transactions_count: number;
   active_loans: ApiLoan[];

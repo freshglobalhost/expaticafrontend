@@ -1,7 +1,7 @@
 import { PageHeader } from "@/components/dashboard/page-header";
 import { MoneyFlowForm } from "@/components/transfer/money-flow-forms";
 
-export const metadata = { title: "Receive — PennyCredit" };
+export const metadata = { title: "Receive — Expatica" };
 
 export default function ReceiveMoneyPage() {
   return (

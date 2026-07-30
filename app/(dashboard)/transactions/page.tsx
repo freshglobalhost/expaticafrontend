@@ -2,7 +2,7 @@ import { PageHeader } from "@/components/dashboard/page-header";
 import { TransactionsTable } from "@/components/dashboard/transactions-table";
 
 export const metadata = {
-  title: "Transactions — PennyCredit",
+  title: "Transactions — Expatica",
 };
 
 export default function TransactionsPage() {

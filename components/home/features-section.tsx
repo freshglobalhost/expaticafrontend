@@ -54,7 +54,7 @@ export function FeaturesSection() {
           className="mb-16 text-center"
         >
           <p className="text-sm font-medium uppercase tracking-widest text-brand-400">
-            Why PennyCredit
+            Why Expatica
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
             Built for trust. Designed for speed.

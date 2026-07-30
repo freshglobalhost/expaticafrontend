@@ -5,7 +5,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Terms & Conditions",
   description:
-    "Read PennyCredit Terms & Conditions covering accounts, loans, investments, fees, security responsibilities, and legal limitations.",
+    "Read Expatica Terms & Conditions covering accounts, loans, investments, fees, security responsibilities, and legal limitations.",
   path: "/terms",
   keywords: ["terms of service", "banking terms", "loan agreement"],
 });
@@ -13,7 +13,7 @@ export const metadata: Metadata = createPageMetadata({
 const SECTIONS = [
   {
     title: "Acceptance of terms",
-    body: "By opening or using a PennyCredit account, you agree to these Terms & Conditions and our Privacy Policy. If you do not agree, do not use our services.",
+    body: "By opening or using a Expatica account, you agree to these Terms & Conditions and our Privacy Policy. If you do not agree, do not use our services.",
   },
   {
     title: "Eligibility",
@@ -33,11 +33,11 @@ const SECTIONS = [
   },
   {
     title: "Limitation of liability",
-    body: "To the maximum extent permitted by law, PennyCredit is not liable for indirect, incidental, or consequential damages arising from use of the platform, except where prohibited by applicable law.",
+    body: "To the maximum extent permitted by law, Expatica is not liable for indirect, incidental, or consequential damages arising from use of the platform, except where prohibited by applicable law.",
   },
   {
     title: "Contact",
-    body: "Questions about these terms: legal@pennycredit.com. Last updated: May 2026.",
+    body: "Questions about these terms: legal@expaticaonline.com. Last updated: May 2026.",
   },
 ];
 

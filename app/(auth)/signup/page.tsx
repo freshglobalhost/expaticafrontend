@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Create Account",
   description:
-    "Open your free PennyCredit account in minutes. Get access to instant loans, savings, investments, virtual cards, and crypto deposits with bank-grade security.",
+    "Open your free Expatica account in minutes. Get access to instant loans, savings, investments, virtual cards, and crypto deposits with bank-grade security.",
   path: "/signup",
   keywords: ["open bank account online", "sign up fintech", "create digital wallet"],
 });

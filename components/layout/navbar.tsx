@@ -24,7 +24,7 @@ export function Navbar() {
             <Shield className="h-5 w-5 text-white" />
           </div>
           <span className="font-display text-xl font-bold tracking-tight text-white">
-            Penny<span className="text-brand-400">Credit</span>
+            Expati<span className="text-brand-400">ca</span>
           </span>
         </Link>
 

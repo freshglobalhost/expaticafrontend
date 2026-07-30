@@ -9,7 +9,7 @@ import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Dashboard",
-  description: "Your PennyCredit account dashboard.",
+  description: "Your Expatica account dashboard.",
   index: false,
 });
 

@@ -7,7 +7,11 @@ import {
   Linkedin,
   Instagram,
   Facebook,
+  MessageCircle,
 } from "lucide-react";
+
+const WHATSAPP_NUMBER = "+12102793062";
+const WHATSAPP_URL = "https://wa.me/12102793062";
 
 const legalLinks = [
   { label: "Privacy Policy", href: "#" },
@@ -55,7 +59,7 @@ export function Footer() {
                 <Shield className="h-5 w-5 text-white" />
               </div>
               <span className="font-display text-xl font-bold text-white">
-                Penny<span className="text-brand-400">Credit</span>
+                Expati<span className="text-brand-400">ca</span>
               </span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-gray-400">
@@ -64,9 +68,18 @@ export function Footer() {
               finance.
             </p>
             <p className="mt-4 text-xs text-gray-500">
-              PennyCredit Financial Services Ltd. · New York, USA · London, UK ·
+              Expatica Financial Services Ltd. · New York, USA · London, UK ·
               Singapore
             </p>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-2.5 text-sm font-medium text-emerald-300 transition-colors hover:border-emerald-400/50 hover:bg-emerald-500/15"
+            >
+              <MessageCircle className="h-4 w-4" />
+              WhatsApp support: {WHATSAPP_NUMBER}
+            </a>
           </div>
 
           <div>
@@ -108,7 +121,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-white/5 pt-8 sm:flex-row">
           <p className="text-xs text-gray-500">
-            © {new Date().getFullYear()} PennyCredit. All rights reserved.
+            © {new Date().getFullYear()} Expatica. All rights reserved.
             Regulated financial services provider.
           </p>
           <div className="flex gap-4">

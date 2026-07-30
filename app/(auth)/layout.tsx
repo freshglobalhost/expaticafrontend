@@ -4,7 +4,7 @@ import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Account access",
-  description: "Sign in or create your PennyCredit account.",
+  description: "Sign in or create your Expatica account.",
   index: false,
 });
 

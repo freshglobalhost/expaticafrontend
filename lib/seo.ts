@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 
 /** Public site URL for canonical links, Open Graph, and sitemap */
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://pennycreditonline.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://expaticaonline.com";
 
-export const SITE_NAME = "PennyCredit";
+export const SITE_NAME = "Expatica";
 
 export const DEFAULT_DESCRIPTION =
-  "PennyCredit is a premium digital banking platform offering instant personal and business loans, multi-currency wallets, investment plans, virtual cards, crypto deposits, and global money transfers — secure, fast, and built for modern finance.";
+  "Expatica is a premium digital banking platform offering instant personal and business loans, multi-currency wallets, investment plans, virtual cards, crypto deposits, and global money transfers — secure, fast, and built for modern finance.";
 
 export const DEFAULT_KEYWORDS = [
-  "PennyCredit",
+  "Expatica",
   "digital banking",
   "online banking",
   "personal loans",
@@ -91,7 +91,7 @@ export function createPageMetadata({
       card: "summary_large_image",
       title: fullTitle,
       description,
-      creator: "@pennycredit",
+      creator: "@expatica",
     },
     category: "finance",
   };
@@ -110,4 +110,5 @@ export const rootMetadata: Metadata = {
     address: false,
     telephone: false,
   },
+  manifest: "/manifest.webmanifest",
 };

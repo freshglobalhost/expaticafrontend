@@ -2,7 +2,7 @@ import { TransactionPinForm } from "@/components/auth/transaction-pin-form";
 import { RequireAuth } from "@/components/auth/require-auth";
 
 export const metadata = {
-  title: "Transaction PIN — PennyCredit",
+  title: "Transaction PIN — Expatica",
 };
 
 export default function TransactionPinPage() {

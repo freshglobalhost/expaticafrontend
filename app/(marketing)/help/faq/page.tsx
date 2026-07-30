@@ -29,7 +29,7 @@ export default function HelpFaqPage() {
           </Link>
           <h1 className="mt-4 font-display text-3xl font-bold text-white">FAQ</h1>
           <p className="mt-2 text-sm text-gray-400">
-            Answers about accounts, loans, savings, investments, cards, and security on PennyCredit.
+            Answers about accounts, loans, savings, investments, cards, and security on Expatica.
           </p>
 
           {isLoading && (

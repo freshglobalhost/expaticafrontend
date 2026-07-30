@@ -91,7 +91,7 @@ export function TransactionPinForm() {
             <ShieldCheck className="h-5 w-5 shrink-0 text-brand-400" />
             <p className="text-xs leading-relaxed text-gray-400">
               Your transaction PIN authorizes transfers and dashboard access.
-              Never share it with anyone, including PennyCredit staff.
+              Never share it with anyone, including Expatica staff.
             </p>
           </div>
         </div>

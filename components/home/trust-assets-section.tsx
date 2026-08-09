@@ -11,8 +11,7 @@ import { Button } from "@/components/ui/button";
 
 const COMPANY_PDF = "/assets/company/about-expatica.pdf";
 const COMPANY_CERTIFICATE = "/assets/company/company-certificate.pdf";
-const COMPANY_VIDEO = "/assets/company/company-video.mp4";
-const COMPANY_VIDEO_POSTER = "/assets/company/company-video-poster.jpg";
+const COMPANY_VIDEO = "/assets/company/expatica.mp4";
 
 export function TrustAssetsSection() {
   return (
@@ -113,7 +112,6 @@ export function TrustAssetsSection() {
                 controls
                 playsInline
                 preload="metadata"
-                poster={COMPANY_VIDEO_POSTER}
               >
                 <source src={COMPANY_VIDEO} type="video/mp4" />
                 Your browser does not support the video tag.

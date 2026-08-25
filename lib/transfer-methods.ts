@@ -6,7 +6,8 @@ export type TransferMethodId =
   | "googlepay"
   | "western"
   | "wise"
-  | "payoneer";
+  | "payoneer"
+  | "crypto";
 
 export interface TransferMethod {
   id: TransferMethodId;
@@ -106,13 +107,19 @@ export const SEND_MONEY_OPTIONS: TransferMethod[] = [
   ...MORE_SEND_OPTIONS,
 ];
 
-/** Withdraw page — local bank payout, same fields as local transfer */
+/** Withdraw page — pick a type, then the matching modal opens */
 export const WITHDRAW_OPTIONS: TransferMethod[] = [
   {
     id: "local",
     label: "Local Transfer",
     subtitle: "Domestic bank withdrawal",
     image: `${LOCAL}/local.svg`,
+  },
+  {
+    id: "crypto",
+    label: "Crypto Withdrawal",
+    subtitle: "Send BTC, ETH, USDT, and more",
+    image: `${LOCAL}/crypto.svg`,
   },
 ];
 

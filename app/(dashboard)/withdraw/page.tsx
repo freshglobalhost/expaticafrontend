@@ -8,7 +8,7 @@ export default function WithdrawPage() {
     <div className="px-4 py-4 sm:px-5 lg:px-6 lg:py-5">
       <PageHeader
         title="Withdraw"
-        description="Send funds to your local bank account"
+        description="Send funds to a local bank account or a crypto address"
         breadcrumbs={[
           { label: "Dashboard", href: "/dashboard" },
           { label: "Withdraw" },

@@ -9,12 +9,12 @@ export function WithdrawPageSection() {
     <div className="space-y-8">
       <div>
         <h2 className="mb-1 text-xs font-semibold uppercase tracking-wider text-gray-500">
-          Local bank withdrawal
+          Choose withdrawal type
         </h2>
         <p className="mb-3 text-xs text-gray-500">
-          The withdrawal form opens automatically. Close it and pick Local Transfer to open it again.
+          Select local bank or crypto, then complete the withdrawal form.
         </p>
-        <WithdrawPicker uiMethods={WITHDRAW_OPTIONS} autoOpen />
+        <WithdrawPicker uiMethods={WITHDRAW_OPTIONS} />
       </div>
 
       <div>

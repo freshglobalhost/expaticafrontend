@@ -118,6 +118,7 @@ export type ApiTransfer = {
   method: number | string;
   method_name: string;
   method_slug: string;
+  kind?: "withdrawal" | "transfer";
   amount: string;
   fee_amount: string;
   status: string;

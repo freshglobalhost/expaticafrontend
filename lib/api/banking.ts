@@ -21,7 +21,7 @@ export async function getTransfers(params?: { page?: number; page_size?: number 
 }
 
 export async function createTransfer(payload: {
-  method: number;
+  method: number | string;
   amount: string;
   transaction_pin: string;
   recipient_details?: Record<string, string>;
@@ -33,8 +33,18 @@ export async function createTransfer(payload: {
   });
 }
 
+export async function getWithdrawals(params?: { page?: number; page_size?: number }) {
+  const qs = new URLSearchParams();
+  if (params?.page) qs.set("page", String(params.page));
+  if (params?.page_size) qs.set("page_size", String(params.page_size));
+  const query = qs.toString();
+  return apiRequest<Paginated<ApiTransfer>>(
+    query ? `/banking/withdrawals/?${query}` : "/banking/withdrawals/"
+  );
+}
+
 export async function createWithdrawal(payload: {
-  method: number;
+  method: number | string;
   amount: string;
   transaction_pin: string;
   recipient_details?: Record<string, string>;

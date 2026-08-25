@@ -8,6 +8,7 @@ import { ActiveLoans } from "./active-loans";
 import { RecentTransactions } from "./recent-transactions";
 import { DashboardLiveActivity } from "./dashboard-live-activity";
 import { YourCardsPreview } from "./your-cards-preview";
+import { ReferralSection } from "./referral-section";
 import { useDashboard } from "@/components/providers/dashboard-provider";
 
 export function DashboardOverview() {
@@ -37,6 +38,7 @@ export function DashboardOverview() {
       </motion.div>
 
       <WalletSection />
+      <ReferralSection />
       <QuickActions />
       <DashboardLiveActivity />
       <YourCardsPreview />

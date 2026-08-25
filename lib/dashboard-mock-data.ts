@@ -235,7 +235,7 @@ export const SIDEBAR_MENU = [
   { href: "/investments", label: "Investments", icon: "invest" },
   { href: "/savings", label: "Savings", icon: "savings" },
   { href: "/crypto/deposit", label: "Deposit", icon: "wallet" },
-  { href: "/withdraw", label: "Withdraw", icon: "wallet" },
+  { href: "/withdraw", label: "Withdraw", icon: "withdraw" },
   { href: "/cards", label: "Virtual Cards", icon: "card" },
   { href: "/transactions", label: "Transactions", icon: "transactions" },
   { href: "/settings/profile", label: "Settings", icon: "settings" },

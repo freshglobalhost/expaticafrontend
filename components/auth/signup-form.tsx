@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
@@ -27,6 +27,13 @@ export function SignupForm() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
+  const [referralCode, setReferralCode] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get("ref")?.trim() ?? "";
+    if (ref) setReferralCode(ref);
+  }, []);
 
   const {
     register,
@@ -61,6 +68,7 @@ export function SignupForm() {
         phone: data.phone,
         country: data.country,
         transaction_pin: data.transactionPin,
+        ...(referralCode ? { referral_code: referralCode } : {}),
       });
       setSuccess(true);
       setTimeout(() => router.push("/login"), 2200);

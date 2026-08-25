@@ -106,6 +106,16 @@ export const SEND_MONEY_OPTIONS: TransferMethod[] = [
   ...MORE_SEND_OPTIONS,
 ];
 
+/** Withdraw page — local bank payout, same fields as local transfer */
+export const WITHDRAW_OPTIONS: TransferMethod[] = [
+  {
+    id: "local",
+    label: "Local Transfer",
+    subtitle: "Domestic bank withdrawal",
+    image: `${LOCAL}/local.svg`,
+  },
+];
+
 export function getTransferMethod(id: TransferMethodId): TransferMethod | undefined {
   return SEND_MONEY_OPTIONS.find((m) => m.id === id);
 }

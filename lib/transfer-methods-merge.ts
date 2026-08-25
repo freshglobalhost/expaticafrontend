@@ -7,7 +7,7 @@ import {
 } from "@/lib/transfer-methods";
 
 export type MergedTransferMethod = TransferMethod & {
-  apiId: number | null;
+  apiId: number | string | null;
   displayOrder: number;
   category?: string;
 };

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Eye, EyeOff, Plus, Loader2 } from "lucide-react";
+import { Eye, EyeOff, Plus, ArrowDownToLine, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { QuickAccess } from "@/components/dashboard/quick-access";
@@ -77,13 +77,22 @@ export function WalletSection() {
               {summary?.recent_transactions_count ?? 0} transactions on record
             </p>
           </div>
-          <Link
-            href="/deposit"
-            className="flex items-center gap-1 rounded-xl border border-white/25 bg-white/10 px-3 py-2 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
-          >
-            <Plus className="h-3.5 w-3.5" />
-            Fund
-          </Link>
+          <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+            <Link
+              href="/deposit"
+              className="flex items-center gap-1 rounded-xl border border-white/25 bg-white/10 px-3 py-2 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+            >
+              <Plus className="h-3.5 w-3.5" />
+              Fund
+            </Link>
+            <Link
+              href="/withdraw"
+              className="flex items-center gap-1 rounded-xl border border-white/25 bg-white/10 px-3 py-2 text-xs font-semibold text-white backdrop-blur-sm hover:bg-white/20"
+            >
+              <ArrowDownToLine className="h-3.5 w-3.5" />
+              Withdraw
+            </Link>
+          </div>
         </div>
 
         <div className="relative mt-4 grid grid-cols-3 gap-2 border-t border-white/15 pt-3 sm:grid-cols-6">

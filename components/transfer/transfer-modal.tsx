@@ -43,7 +43,7 @@ interface TransferModalProps {
     label: string;
     subtitle: string;
   } | null;
-  methodApiId?: number | null;
+  methodApiId?: number | string | null;
   onClose: () => void;
 }
 
@@ -126,7 +126,7 @@ function TransferForm({
   onSuccess,
 }: {
   methodId: TransferMethodId;
-  methodApiId: number | null;
+  methodApiId: number | string | null;
   onSuccess: () => void;
 }) {
   const { summary, refetch } = useDashboard();

@@ -16,6 +16,7 @@ import {
   Settings,
   Shield as LogoIcon,
   Loader2,
+  ArrowDownToLine,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { logout } from "@/lib/api/auth-storage";
@@ -34,6 +35,7 @@ const iconMap: Record<string, React.ElementType> = {
   devices: Monitor,
   settings: Settings,
   logout: LogOut,
+  withdraw: ArrowDownToLine,
 };
 
 function formatMoney(n: number | string, currency = "USD") {

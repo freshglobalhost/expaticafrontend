@@ -38,7 +38,7 @@ interface WithdrawalModalProps {
     label: string;
     subtitle: string;
   } | null;
-  methodApiId?: number | null;
+  methodApiId?: number | string | null;
   onClose: () => void;
 }
 
@@ -120,7 +120,7 @@ function WithdrawalForm({
   onSuccess,
 }: {
   methodId: string;
-  methodApiId: number | null;
+  methodApiId: number | string | null;
   onSuccess: () => void;
 }) {
   const { summary, refetch } = useDashboard();
@@ -265,18 +265,8 @@ function LocalWithdrawalFields() {
             type="text"
             className={inputClass}
             required
-            placeholder="John Smith"
-          />
-        </Field>
-      </Section>
-      <Section icon={Building2} title="Bank details" accent="amber">
-        <Field label="Bank name">
-          <input
-            name="bank_name"
-            type="text"
-            className={inputClass}
-            required
-            placeholder="Bank name"
+            placeholder="Account holder name"
+            autoComplete="off"
           />
         </Field>
         <div className="grid grid-cols-2 gap-2">
@@ -287,6 +277,7 @@ function LocalWithdrawalFields() {
               className={inputClass}
               required
               placeholder="Account number"
+              autoComplete="off"
             />
           </Field>
           <Field label="Routing number">
@@ -294,10 +285,33 @@ function LocalWithdrawalFields() {
               name="routing_number"
               type="text"
               className={inputClass}
-              placeholder="Routing number (optional)"
+              required
+              placeholder="Routing number"
+              autoComplete="off"
             />
           </Field>
         </div>
+      </Section>
+      <Section icon={Building2} title="Bank details" accent="amber">
+        <Field label="Bank name">
+          <input
+            name="bank_name"
+            type="text"
+            className={inputClass}
+            required
+            placeholder="Bank name"
+            autoComplete="off"
+          />
+        </Field>
+        <Field label="Account type">
+          <select name="account_type" className={inputClass} required defaultValue="">
+            <option value="" disabled>
+              Select type…
+            </option>
+            <option>Checking</option>
+            <option>Savings Account</option>
+          </select>
+        </Field>
       </Section>
     </>
   );

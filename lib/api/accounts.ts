@@ -27,6 +27,7 @@ export async function register(payload: {
   transaction_pin: string;
   address?: string;
   gender?: string;
+  referral_code?: string;
 }) {
   return apiRequest<ApiUser>("/accounts/register/", {
     method: "POST",

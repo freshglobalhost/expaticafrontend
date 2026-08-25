@@ -25,7 +25,7 @@ export function useTransferMethods(
   );
 
   const methodIdBySlug = useMemo(() => {
-    const map = new Map<string, number>();
+    const map = new Map<string, number | string>();
     for (const m of methods) {
       if (m.apiId != null) map.set(m.id, m.apiId);
     }
@@ -45,7 +45,7 @@ export function useTransferMethods(
 export function getApiIdForMethod(
   methods: MergedTransferMethod[],
   slug: string | null
-): number | null {
+): number | string | null {
   if (!slug) return null;
   return methods.find((m) => m.id === slug)?.apiId ?? null;
 }

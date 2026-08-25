@@ -22,6 +22,8 @@ export type ApiUser = {
   is_profile_complete: boolean;
   enable_transfer: boolean;
   assigned_bank_account: ApiAssignedBankAccount | null;
+  referral_code?: string;
+  referral_link?: string;
   date_joined: string;
 };
 
@@ -103,7 +105,7 @@ export type ApiLoanApplication = {
 };
 
 export type ApiTransferMethod = {
-  id: number;
+  id: number | string;
   slug: string;
   name: string;
   category: string;
@@ -112,8 +114,8 @@ export type ApiTransferMethod = {
 };
 
 export type ApiTransfer = {
-  id: number;
-  method: number;
+  id: number | string;
+  method: number | string;
   method_name: string;
   method_slug: string;
   amount: string;

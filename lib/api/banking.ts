@@ -32,3 +32,20 @@ export async function createTransfer(payload: {
     json: payload,
   });
 }
+
+export async function createWithdrawal(payload: {
+  method: number;
+  amount: string;
+  transaction_pin: string;
+  recipient_details?: Record<string, string>;
+  note?: string;
+}) {
+  return apiRequest<ApiTransfer>("/banking/withdrawals/", {
+    method: "POST",
+    json: payload,
+  });
+}
+
+export async function getUserReferralLink() {
+  return apiRequest<{ referral_code: string; referral_link: string }>("/accounts/me/referral/");
+}

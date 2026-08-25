@@ -37,8 +37,8 @@ export function DashboardOverview() {
         </p>
       </motion.div>
 
-      <WalletSection />
       <ReferralSection />
+      <WalletSection />
       <QuickActions />
       <DashboardLiveActivity />
       <YourCardsPreview />

@@ -2,19 +2,16 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, Copy } from "lucide-react";
+import { Check, Copy, Gift, Loader2 } from "lucide-react";
 import { useDashboard } from "@/components/providers/dashboard-provider";
 import { Button } from "@/components/ui/button";
-import { getReferralCode, getReferralLink } from "@/lib/referral";
+import { resolveReferral } from "@/lib/referral";
+import { cn } from "@/lib/utils";
 
-export function ReferralSection() {
-  const { user } = useDashboard();
+export function ReferralSection({ compact = false }: { compact?: boolean }) {
+  const { user, isLoading } = useDashboard();
   const [copied, setCopied] = useState(false);
-
-  const referralCode =
-    user?.referral_code || getReferralCode(user?.username);
-  const referralLink =
-    user?.referral_link || getReferralLink(user?.username);
+  const { code: referralCode, link: referralLink } = resolveReferral(user);
 
   const handleCopyLink = async () => {
     if (!referralLink) return;
@@ -27,8 +24,47 @@ export function ReferralSection() {
     }
   };
 
+  if (isLoading && !user) {
+    return (
+      <div
+        className={cn(
+          "flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.02]",
+          compact ? "h-[52px]" : "py-6"
+        )}
+      >
+        <Loader2 className="h-4 w-4 animate-spin text-brand-400" />
+      </div>
+    );
+  }
+
   if (!referralCode || !referralLink) {
     return null;
+  }
+
+  if (compact) {
+    return (
+      <div className="mt-3 rounded-xl border border-brand-500/20 bg-brand-500/5 p-2.5">
+        <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-gray-500">
+          Referral link
+        </p>
+        <div className="flex items-center gap-2">
+          <code className="min-w-0 flex-1 truncate text-[11px] text-gray-300">
+            {referralLink}
+          </code>
+          <button
+            type="button"
+            onClick={handleCopyLink}
+            className="shrink-0 rounded-lg p-1 text-gray-500 hover:bg-white/5 hover:text-brand-400"
+            title="Copy referral link"
+          >
+            {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+          </button>
+        </div>
+        <p className="mt-1 truncate text-[10px] text-gray-500">
+          Name: <span className="text-gray-300">{referralCode}</span>
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -37,7 +73,10 @@ export function ReferralSection() {
       animate={{ opacity: 1, y: 0 }}
       className="rounded-xl border border-brand-500/20 bg-gradient-to-br from-brand-500/10 to-transparent p-4"
     >
-      <h3 className="mb-2 text-sm font-semibold text-white">Your referral link</h3>
+      <h3 className="mb-1 flex items-center gap-2 text-sm font-semibold text-white">
+        <Gift className="h-4 w-4 text-brand-400" />
+        Your referral link
+      </h3>
       <p className="mb-3 text-xs text-gray-500">
         Share this link with friends. Your username is used as the referral name.
       </p>
@@ -71,12 +110,7 @@ export function ReferralSection() {
           )}
         </AnimatePresence>
 
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={handleCopyLink}
-          className="w-full"
-        >
+        <Button variant="secondary" size="sm" onClick={handleCopyLink} className="w-full">
           <Copy className="h-4 w-4" />
           Copy referral link
         </Button>

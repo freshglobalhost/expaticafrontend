@@ -22,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { logout } from "@/lib/api/auth-storage";
 import { useDashboard } from "@/components/providers/dashboard-provider";
 import { SIDEBAR_MENU } from "@/lib/dashboard-mock-data";
+import { ReferralSection } from "@/components/dashboard/referral-section";
 
 const iconMap: Record<string, React.ElementType> = {
   layout: LayoutDashboard,
@@ -120,6 +121,7 @@ export function DashboardSidebar({ onNavigate }: { onNavigate?: () => void }) {
                 </div>
               </div>
             </div>
+            <ReferralSection compact />
           </>
         )}
       </div>

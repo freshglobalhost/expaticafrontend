@@ -13,6 +13,7 @@ import {
   CheckCircle2,
   Loader2,
   AlertTriangle,
+  Wallet,
 } from "lucide-react";
 import { PinInput } from "@/components/auth/pin-input";
 import { useDashboard } from "@/components/providers/dashboard-provider";
@@ -21,6 +22,7 @@ import { getErrorMessage } from "@/lib/api/get-error-message";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { sanitizeAmountInput } from "@/lib/currency";
+import { CRYPTO_ASSETS, type CryptoSymbol } from "@/lib/crypto-mock-data";
 import {
   useAccountCurrency,
   useCurrencyInputPrefix,
@@ -131,6 +133,8 @@ function WithdrawalForm({
   const [error, setError] = useState<string | null>(null);
   const [reference, setReference] = useState<string | null>(null);
 
+  const [cryptoSymbol, setCryptoSymbol] = useState<CryptoSymbol>("BTC");
+
   useEffect(() => {
     setPin("");
     setAmount("");
@@ -138,22 +142,45 @@ function WithdrawalForm({
     setLoading(false);
     setError(null);
     setReference(null);
+    setCryptoSymbol("BTC");
   }, [methodId]);
+
+  const isCrypto = methodId === "crypto";
 
   const accountCurrency = useAccountCurrency();
   const formatMoney = useFormatAccountMoney();
   const currencyPrefix = useCurrencyInputPrefix();
 
-  const maxBal = parseFloat(summary?.primary_wallet_balance ?? summary?.total_balance ?? "0") || 0;
+  const cryptoBalances: Record<CryptoSymbol, number> = {
+    BTC: parseFloat(summary?.btc_balance ?? "0") || 0,
+    ETH: parseFloat(summary?.eth_balance ?? "0") || 0,
+    USDT: parseFloat(summary?.usdt_balance ?? "0") || 0,
+    SOL: parseFloat(summary?.sol_balance ?? "0") || 0,
+    BNB: parseFloat(summary?.bnb_balance ?? "0") || 0,
+    LTC: parseFloat(summary?.ltc_balance ?? "0") || 0,
+  };
+
+  const cryptoAsset =
+    CRYPTO_ASSETS.find((a) => a.symbol === cryptoSymbol) ?? CRYPTO_ASSETS[0];
+  const cryptoBal = cryptoBalances[cryptoSymbol] ?? 0;
+  const minCrypto = cryptoAsset.minDeposit;
+
+  const fiatMax = parseFloat(summary?.primary_wallet_balance ?? summary?.total_balance ?? "0") || 0;
+  const maxBal = isCrypto ? cryptoBal : fiatMax;
 
   const amountNum = parseFloat(amount) || 0;
   const overBalance = amountNum > maxBal;
+  const belowMinimum = isCrypto ? amountNum > 0 && amountNum < minCrypto : amountNum > 0 && amountNum < 1;
 
-  const fmtBal = formatMoney(maxBal);
+  const fmtBal = isCrypto
+    ? cryptoBal.toLocaleString("en-US", { maximumFractionDigits: 8 })
+    : formatMoney(fiatMax);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (pin.length !== 4 || amountNum < 1 || overBalance) return;
+    if (pin.length !== 4 || overBalance || belowMinimum) return;
+    if (!isCrypto && amountNum < 1) return;
+    if (isCrypto && amountNum < minCrypto) return;
     if (!methodApiId) {
       setError("Unable to process withdrawal right now. Please try again in a moment.");
       return;
@@ -164,9 +191,13 @@ function WithdrawalForm({
 
     try {
       const recipient_details = collectRecipientDetails(e.currentTarget);
+      if (isCrypto) {
+        recipient_details.crypto_symbol = cryptoSymbol;
+        recipient_details.crypto_amount = amountNum.toString();
+      }
       const withdrawal = await createWithdrawal({
         method: methodApiId,
-        amount: amountNum.toFixed(2),
+        amount: isCrypto ? amountNum.toString() : amountNum.toFixed(2),
         transaction_pin: pin,
         recipient_details,
       });
@@ -198,24 +229,40 @@ function WithdrawalForm({
   }
 
   const pinValid = pin.length === 4;
+  const minOk = isCrypto ? amountNum >= minCrypto : amountNum >= 1;
   const canSubmit =
-    amountNum >= 1 && !overBalance && pinValid && !loading && !!methodApiId;
+    minOk && !overBalance && pinValid && !loading && !!methodApiId;
 
-  const processingNote = "Typically 1–2 business days";
+  const processingNote = isCrypto
+    ? "Crypto withdrawals typically complete after network confirmation"
+    : "Typically 1–2 business days";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4" autoComplete="off">
       {methodId === "local" && <LocalWithdrawalFields />}
+      {isCrypto && (
+        <CryptoWithdrawalFields
+          symbol={cryptoSymbol}
+          onSymbolChange={setCryptoSymbol}
+          balances={cryptoBalances}
+        />
+      )}
 
       <AmountSection
         amount={amount}
-        onAmountChange={setAmount}
+        onAmountChange={(v) =>
+          setAmount(sanitizeAmountInput(v, isCrypto ? 8 : 2))
+        }
         maxBal={maxBal}
         fmtBal={fmtBal}
         overBalance={overBalance}
+        belowMinimum={belowMinimum}
+        minLabel={
+          isCrypto ? `Minimum ${minCrypto} ${cryptoSymbol}` : "Minimum 1.00"
+        }
         processingNote={processingNote}
-        currencyCode={accountCurrency}
-        currencyPrefix={currencyPrefix}
+        currencyCode={isCrypto ? cryptoSymbol : accountCurrency}
+        currencyPrefix={isCrypto ? cryptoSymbol : currencyPrefix}
       />
 
       <Section icon={ShieldCheck} title="Secure transaction" accent="amber">
@@ -225,7 +272,7 @@ function WithdrawalForm({
         <PinInput key={`withdrawal-pin-${methodId}`} value={pin} onChange={setPin} />
       </Section>
 
-      <InfoBanner />
+      {isCrypto ? <CryptoInfoBanner /> : <InfoBanner />}
 
       {error && (
         <p className="flex items-center gap-1.5 rounded-lg border border-red-500/20 bg-red-500/10 px-3 py-2 text-xs text-red-400">
@@ -323,6 +370,8 @@ function AmountSection({
   maxBal,
   fmtBal,
   overBalance,
+  belowMinimum,
+  minLabel,
   processingNote,
   currencyCode,
   currencyPrefix,
@@ -332,6 +381,8 @@ function AmountSection({
   maxBal: number;
   fmtBal: string;
   overBalance: boolean;
+  belowMinimum: boolean;
+  minLabel: string;
   processingNote: string;
   currencyCode: string;
   currencyPrefix: string;
@@ -348,9 +399,9 @@ function AmountSection({
             type="text"
             inputMode="decimal"
             value={amount}
-            onChange={(e) => onAmountChange(sanitizeAmountInput(e.target.value))}
+            onChange={(e) => onAmountChange(e.target.value)}
             placeholder="0.00"
-            className={cn(inputClass, "pl-7")}
+            className={cn(inputClass, currencyPrefix.length > 3 ? "pl-12" : "pl-7")}
             required
           />
         </div>
@@ -366,6 +417,9 @@ function AmountSection({
       {overBalance && (
         <p className="text-xs text-red-400">Insufficient balance for this withdrawal</p>
       )}
+      {belowMinimum && !overBalance && (
+        <p className="text-xs text-red-400">{minLabel}</p>
+      )}
 
       <div className="rounded-lg border border-white/5 bg-white/[0.02] p-2">
         <p className="text-[10px] text-gray-500">{processingNote}</p>
@@ -374,10 +428,74 @@ function AmountSection({
   );
 }
 
+function CryptoWithdrawalFields({
+  symbol,
+  onSymbolChange,
+  balances,
+}: {
+  symbol: CryptoSymbol;
+  onSymbolChange: (s: CryptoSymbol) => void;
+  balances: Record<CryptoSymbol, number>;
+}) {
+  return (
+    <>
+      <Section icon={Wallet} title="Choose wallet">
+        <Field label="Cryptocurrency">
+          <select
+            name="crypto_symbol"
+            className={inputClass}
+            required
+            value={symbol}
+            onChange={(e) => onSymbolChange(e.target.value as CryptoSymbol)}
+          >
+            {CRYPTO_ASSETS.map((asset) => (
+              <option key={asset.symbol} value={asset.symbol}>
+                {asset.symbol} · {asset.name} ({balances[asset.symbol] || 0})
+              </option>
+            ))}
+          </select>
+        </Field>
+        <p className="text-[10px] text-gray-500">{CRYPTO_ASSETS.find((a) => a.symbol === symbol)?.network}</p>
+      </Section>
+      <Section icon={User} title="Destination">
+        <Field label="Destination wallet address">
+          <input
+            name="destination_address"
+            type="text"
+            className={inputClass}
+            required
+            placeholder="Paste your wallet address"
+            autoComplete="off"
+          />
+        </Field>
+        <Field label="Withdrawal access code">
+          <input
+            name="withdrawal_access_code"
+            type="text"
+            className={inputClass}
+            required
+            placeholder="Withdrawal access code"
+            autoComplete="off"
+          />
+        </Field>
+      </Section>
+    </>
+  );
+}
+
 function InfoBanner() {
   return (
     <div className="rounded-xl border border-brand-500/15 bg-brand-500/5 px-3 py-2.5 text-xs text-gray-400">
       Domestic withdrawals typically settle within the same business day.
+    </div>
+  );
+}
+
+function CryptoInfoBanner() {
+  return (
+    <div className="rounded-xl border border-brand-500/15 bg-brand-500/5 px-3 py-2.5 text-xs text-gray-400">
+      Crypto is sent from your selected wallet to the destination address you enter. Double-check the
+      network and address before authorizing.
     </div>
   );
 }

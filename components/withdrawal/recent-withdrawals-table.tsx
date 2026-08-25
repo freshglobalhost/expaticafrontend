@@ -56,7 +56,7 @@ export function RecentWithdrawalsTable() {
   if (rows.length === 0) {
     return (
       <p className="rounded-xl border border-dashed border-white/10 px-6 py-8 text-center text-sm text-gray-500">
-        No withdrawals yet. Choose local transfer above to withdraw.
+        No withdrawals yet. Choose a withdrawal type above.
       </p>
     );
   }
@@ -77,11 +77,17 @@ export function RecentWithdrawalsTable() {
           {rows.map((row) => {
             const variant =
               statusVariant[row.status as keyof typeof statusVariant] ?? "default";
+            const cryptoSymbol = row.recipient_details?.crypto_symbol;
+            const cryptoAmount = row.recipient_details?.crypto_amount;
+            const amountLabel =
+              cryptoSymbol && cryptoAmount
+                ? `${cryptoAmount} ${cryptoSymbol}`
+                : fmt(row.amount);
             return (
               <tr key={row.id} className="border-b border-white/5 hover:bg-white/5">
                 <td className="px-5 py-4 font-mono text-brand-400">{row.reference_code}</td>
                 <td className="px-5 py-4 text-white">{row.method_name}</td>
-                <td className="px-5 py-4 text-right font-semibold">{fmt(row.amount)}</td>
+                <td className="px-5 py-4 text-right font-semibold">{amountLabel}</td>
                 <td className="px-5 py-4">
                   <Badge variant={variant}>{row.status}</Badge>
                 </td>

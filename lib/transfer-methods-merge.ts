@@ -2,6 +2,7 @@ import type { ApiTransferMethod } from "@/lib/api/types";
 import {
   SEND_MONEY_OPTIONS,
   DASHBOARD_SEND_OPTIONS,
+  WITHDRAW_OPTIONS,
   type TransferMethod,
   type TransferMethodId,
 } from "@/lib/transfer-methods";
@@ -13,8 +14,10 @@ export type MergedTransferMethod = TransferMethod & {
 };
 
 const UI_BY_SLUG = new Map<TransferMethodId, TransferMethod>(
-  SEND_MONEY_OPTIONS.map((m) => [m.id, m])
+  [...SEND_MONEY_OPTIONS, ...WITHDRAW_OPTIONS].map((m) => [m.id, m])
 );
+
+const WITHDRAW_ONLY_SLUGS = new Set<string>(["crypto"]);
 
 export type MergeTransferMethodsOptions = {
   /** When true, append API methods not listed in uiMethods (full /send page). Default false. */
@@ -54,7 +57,11 @@ export function mergeTransferMethods(
 
   const uiSlugs = new Set(uiMethods.map((m) => m.id));
   const extraFromApi = apiMethods
-    .filter((api) => !uiSlugs.has(api.slug as TransferMethodId))
+    .filter(
+      (api) =>
+        !uiSlugs.has(api.slug as TransferMethodId) &&
+        !WITHDRAW_ONLY_SLUGS.has(api.slug)
+    )
     .map((api) => {
       const ui = UI_BY_SLUG.get(api.slug as TransferMethodId);
       return {

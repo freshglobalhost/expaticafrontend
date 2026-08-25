@@ -193,10 +193,19 @@ export const DASHBOARD_SEARCH_INDEX: DashboardSearchItem[] = [
   {
     id: "withdraw",
     title: "Withdraw",
-    subtitle: "Send funds to your local bank account",
+    subtitle: "Local bank or crypto withdrawal",
     href: "/withdraw",
     category: "Transfers",
-    keywords: ["withdraw", "withdrawal", "cash out", "payout", "local", "bank"],
+    keywords: ["withdraw", "withdrawal", "cash out", "payout", "local", "bank", "crypto"],
+    icon: Wallet,
+  },
+  {
+    id: "crypto-withdraw",
+    title: "Crypto withdrawal",
+    subtitle: "Send BTC, ETH, USDT, SOL, BNB, or LTC",
+    href: "/withdraw",
+    category: "Crypto",
+    keywords: ["crypto", "withdraw", "bitcoin", "btc", "eth", "usdt", "wallet", "address"],
     icon: Wallet,
   },
   {
